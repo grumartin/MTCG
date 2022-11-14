@@ -4,12 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/Router.java" afterDir="false" />
+    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Http Server implemented">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/Router.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/enums/ContentType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/enums/HttpStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/enums/Method.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/request/Request.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/request/RequestBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/request/RequestHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/response/Response.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/echo/EchoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/echo/EchoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/RequestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/RequestTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/ServerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +32,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -42,20 +55,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "last_opened_file_path": "C:/Users/martin/Workspaces/MTCG/src/main/java/at/fhtw/httpserver/request",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/martin/Workspaces/MTCG/src/main/java/at/fhtw/httpserver/request&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\martin\Workspaces\MTCG\src\main\java\at\fhtw\httpserver\request" />
@@ -63,6 +77,9 @@
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\martin\Workspaces\MTCG\src\main\java\at\fhtw" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="at.fhtw.httpserver" />
@@ -72,36 +89,8 @@
       <recent name="at.fhtw.httpserver.response" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ServerTest">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.Main" />
-      <module name="MTCG" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.fhtw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RequestTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="MTCG" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.fhtw.httpserver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.RequestTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ServerTest.testUserServiceGetUserWithoutAuthorization">
+    <configuration name="ServerTest.testLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
@@ -111,42 +100,83 @@
       </extension>
       <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
       <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="testLogin" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MTCG [compile]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="compile" />
-              </list>
-            </option>
-            <option name="pomFileName" value="pom.xml" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method v="2" />
+    <configuration name="ServerTest.testUserServiceGetUserWithoutAuthorization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MTCG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.fhtw.httpserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
+      <option name="METHOD_NAME" value="testUserServiceGetUserWithoutAuthorization" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerTest.testUserServiceUpdateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MTCG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.fhtw.httpserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
+      <option name="METHOD_NAME" value="testUserServiceUpdateUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerTest.testUserServiceUpdateUserWithAdmin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MTCG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.fhtw.httpserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
+      <option name="METHOD_NAME" value="testUserServiceUpdateUserWithAdmin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerTest.testUserServiceUpdateWithoutAuth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MTCG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.fhtw.httpserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
+      <option name="METHOD_NAME" value="testUserServiceUpdateWithoutAuth" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ServerTest" />
-        <item itemvalue="JUnit.RequestTest" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Maven.MTCG [compile]" />
+        <item itemvalue="JUnit.ServerTest.testUserServiceGetUserWithoutAuthorization" />
+        <item itemvalue="JUnit.ServerTest.testUserServiceUpdateWithoutAuth" />
+        <item itemvalue="JUnit.ServerTest.testUserServiceUpdateUserWithAdmin" />
+        <item itemvalue="JUnit.ServerTest.testUserServiceUpdateUser" />
+        <item itemvalue="JUnit.ServerTest.testLogin" />
       </list>
     </recent_temporary>
   </component>
@@ -158,8 +188,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666776968006</updated>
-      <workItem from="1666776970293" duration="2417000" />
+      <workItem from="1666776970293" duration="14708000" />
+      <workItem from="1666805318059" duration="9122000" />
+      <workItem from="1666865084612" duration="11033000" />
+      <workItem from="1667324493562" duration="282000" />
+      <workItem from="1667473327754" duration="11616000" />
+      <workItem from="1667650851283" duration="80000" />
+      <workItem from="1667815116145" duration="5597000" />
+      <workItem from="1667921325082" duration="38000" />
+      <workItem from="1667923642211" duration="611000" />
+      <workItem from="1668005778365" duration="559000" />
+      <workItem from="1668153830607" duration="6232000" />
     </task>
+    <task id="LOCAL-00001" summary="Http Server implemented">
+      <created>1666779600774</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666779600774</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,5 +250,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Http Server implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Http Server implemented" />
   </component>
 </project>

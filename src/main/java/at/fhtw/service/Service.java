@@ -1,8 +1,8 @@
 package at.fhtw.service;
 
-import at.fhtw.httpserver.request.Request;
-import at.fhtw.httpserver.response.Response;
+import at.fhtw.httpserver.server.Request;
+import at.fhtw.httpserver.server.Response;
 
 public interface Service {
-    Response handelRequest(Request request);
+    Response handleRequest(Request request);
 }

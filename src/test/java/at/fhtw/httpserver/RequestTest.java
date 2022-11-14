@@ -1,7 +1,12 @@
 package at.fhtw.httpserver;
 
-import at.fhtw.httpserver.request.Request;
+import at.fhtw.httpserver.server.Request;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
