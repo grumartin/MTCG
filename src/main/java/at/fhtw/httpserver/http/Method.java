@@ -1,4 +1,4 @@
-package at.fhtw.httpserver.enums;
+package at.fhtw.httpserver.http;
 
 public enum Method {
     GET,

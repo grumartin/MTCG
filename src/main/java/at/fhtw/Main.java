@@ -1,8 +1,11 @@
 package at.fhtw;
 
-import at.fhtw.httpserver.Router;
-import at.fhtw.httpserver.Server;
+import at.fhtw.httpserver.server.Server;
+import at.fhtw.httpserver.utils.Router;
 import at.fhtw.service.echo.EchoService;
+import at.fhtw.service.pckg.PackageService;
+import at.fhtw.service.session.SessionService;
+import at.fhtw.service.user.UserService;
 
 import java.io.IOException;
 
@@ -20,6 +23,9 @@ public class Main {
         Router router = new Router();
         //alle Services einfügen
         router.addService("/echo", new EchoService());
+        router.addService("/users", new UserService());
+        router.addService("/sessions", new SessionService());
+        router.addService("/packages", new PackageService());
         return router;
     }
 }
