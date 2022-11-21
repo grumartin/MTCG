@@ -3,6 +3,7 @@ package at.fhtw.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.concurrent.ExecutionException;
 
 public class UnitOfWork {
@@ -29,9 +30,9 @@ public class UnitOfWork {
         }
     }
 
-    public PreparedStatement getPreparedStatement(String sqlStatement) throws RuntimeException{
+    public PreparedStatement getPreparedStatement(String sqlStatement, boolean returnGeneratedKey) throws RuntimeException{
         try {
-            return this.DBConnection.prepareStatement(sqlStatement);
+            return this.DBConnection.prepareStatement(sqlStatement, returnGeneratedKey ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
