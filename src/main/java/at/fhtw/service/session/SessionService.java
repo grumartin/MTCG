@@ -7,7 +7,7 @@ import at.fhtw.httpserver.server.Response;
 import at.fhtw.models.User;
 import at.fhtw.service.Service;
 import at.fhtw.service.user.UserController;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.sql.ResultSet;

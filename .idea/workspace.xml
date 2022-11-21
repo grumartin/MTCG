@@ -4,23 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Http Server implemented">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Unit of Work implementation. UserService implementation completed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/Router.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/enums/ContentType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/enums/HttpStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/enums/Method.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/request/Request.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/request/RequestBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/request/RequestHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/response/Response.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/UnitOfWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/UnitOfWork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Package.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Pckg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/echo/EchoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/echo/EchoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/RequestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/RequestTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/session/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/session/SessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/ServerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="Enum" />
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -41,10 +38,17 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feat/poc" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -82,6 +86,7 @@
       <recent name="C:\Users\martin\Workspaces\MTCG\src\main\java\at\fhtw" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="at.fhtw.service.pckg" />
       <recent name="at.fhtw.httpserver" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -89,82 +94,79 @@
       <recent name="at.fhtw.httpserver.response" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ServerTest.testUserServiceGetUserWithoutAuthorization">
-    <configuration name="ServerTest.testLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.PackageControllerTest.testAcquireCardsPackage">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.Main" />
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.httpserver.*" />
+          <option name="PATTERN" value="at.fhtw.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
-      <option name="METHOD_NAME" value="testLogin" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PackageControllerTest.testAcquireCardsPackage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MTCG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.fhtw.service.pckg.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.fhtw.service.pckg" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.pckg.PackageControllerTest" />
+      <option name="METHOD_NAME" value="testAcquireCardsPackage" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerTest.testUserServiceGetUserWithoutAuthorization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PackageControllerTest.testAcquireCardsPackageWithoutAuth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.httpserver.*" />
+          <option name="PATTERN" value="at.fhtw.service.pckg.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
-      <option name="METHOD_NAME" value="testUserServiceGetUserWithoutAuthorization" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.pckg" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.pckg.PackageControllerTest" />
+      <option name="METHOD_NAME" value="testAcquireCardsPackageWithoutAuth" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerTest.testUserServiceUpdateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PackageControllerTest.testCreatePackage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.httpserver.*" />
+          <option name="PATTERN" value="at.fhtw.service.pckg.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
-      <option name="METHOD_NAME" value="testUserServiceUpdateUser" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.pckg" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.pckg.PackageControllerTest" />
+      <option name="METHOD_NAME" value="testCreatePackage" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerTest.testUserServiceUpdateUserWithAdmin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PackageControllerTest.testCreatePackageDuplicateCards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.httpserver.*" />
+          <option name="PATTERN" value="at.fhtw.service.pckg.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
-      <option name="METHOD_NAME" value="testUserServiceUpdateUserWithAdmin" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServerTest.testUserServiceUpdateWithoutAuth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="MTCG" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.fhtw.httpserver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.httpserver" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.httpserver.ServerTest" />
-      <option name="METHOD_NAME" value="testUserServiceUpdateWithoutAuth" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.pckg" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.pckg.PackageControllerTest" />
+      <option name="METHOD_NAME" value="testCreatePackageDuplicateCards" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,11 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ServerTest.testUserServiceGetUserWithoutAuthorization" />
-        <item itemvalue="JUnit.ServerTest.testUserServiceUpdateWithoutAuth" />
-        <item itemvalue="JUnit.ServerTest.testUserServiceUpdateUserWithAdmin" />
-        <item itemvalue="JUnit.ServerTest.testUserServiceUpdateUser" />
-        <item itemvalue="JUnit.ServerTest.testLogin" />
+        <item itemvalue="JUnit.PackageControllerTest.testAcquireCardsPackage" />
+        <item itemvalue="JUnit.PackageControllerTest.testCreatePackage" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.PackageControllerTest.testAcquireCardsPackageWithoutAuth" />
+        <item itemvalue="JUnit.PackageControllerTest.testCreatePackageDuplicateCards" />
       </list>
     </recent_temporary>
   </component>
@@ -199,6 +201,15 @@
       <workItem from="1667923642211" duration="611000" />
       <workItem from="1668005778365" duration="559000" />
       <workItem from="1668153830607" duration="6232000" />
+      <workItem from="1668456660155" duration="1187000" />
+      <workItem from="1668457861180" duration="165000" />
+      <workItem from="1668526341735" duration="71000" />
+      <workItem from="1668526851321" duration="153000" />
+      <workItem from="1668528598726" duration="78000" />
+      <workItem from="1668604056689" duration="225000" />
+      <workItem from="1668856409067" duration="395000" />
+      <workItem from="1668966621458" duration="11438000" />
+      <workItem from="1669023323617" duration="6281000" />
     </task>
     <task id="LOCAL-00001" summary="Http Server implemented">
       <created>1666779600774</created>
@@ -207,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666779600774</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Unit of Work implementation. UserService implementation completed">
+      <created>1668456809219</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668456809219</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +242,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/feat/poc" />
+                        <option value="feat/pckg" />
                       </list>
                     </value>
                   </entry>
@@ -253,6 +271,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Http Server implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Http Server implemented" />
+    <MESSAGE value="Unit of Work implementation. UserService implementation completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unit of Work implementation. UserService implementation completed" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="at.fhtw.service.pckg.PackageController" memberName="packageRepo" />
+        <PinnedItemInfo parentTag="at.fhtw.models.Pckg" memberName="p_id" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

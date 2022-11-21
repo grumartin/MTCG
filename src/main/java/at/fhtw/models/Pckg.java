@@ -2,7 +2,7 @@ package at.fhtw.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Package {
+public class Pckg {
     @SerializedName(value = "p_id", alternate = "P_id")
     private int p_id;
     @SerializedName(value = "price", alternate = "Price")
@@ -10,7 +10,7 @@ public class Package {
     @SerializedName(value = "name", alternate = "Name")
     private String name;
 
-    public Package(int p_id, int price, String name) {
+    public Pckg(int p_id, int price, String name) {
         this.p_id = p_id;
         this.price = price;
         this.name = name;

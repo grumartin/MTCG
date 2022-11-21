@@ -52,7 +52,7 @@ class ServerTest {
         urlConnection.setDoOutput(true);
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        printWriter.write("{\"Username\": \"Karl\", \r\n \"Password\":\"543534\"}");
+        printWriter.write("{\"Username\": \"Hans\", \r\n \"Password\":\"12345\"}");
         printWriter.close();
         InputStream inputStream = urlConnection.getInputStream();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

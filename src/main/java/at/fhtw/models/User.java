@@ -1,7 +1,7 @@
 package at.fhtw.models;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.google.gson.annotations.SerializedName;
-import org.codehaus.jackson.annotate.JsonAnyGetter;
 
 import java.util.HashMap;
 import java.util.Map;

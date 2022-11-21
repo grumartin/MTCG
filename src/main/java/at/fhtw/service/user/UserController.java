@@ -7,8 +7,8 @@ import at.fhtw.httpserver.http.HttpStatus;
 import at.fhtw.httpserver.server.Request;
 import at.fhtw.httpserver.server.Response;
 import at.fhtw.models.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -18,16 +18,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import static at.fhtw.service.Service.unitOfWork;
+
 public class UserController {
     private Gson gson;
     private UserRepo userRepo;
     private ObjectMapper mapper;
-    private UnitOfWork unitOfWork;
     public UserController() {
         this.gson = new Gson();
         this.userRepo = new UserRepo();
         this.mapper = new ObjectMapper();
-        this.unitOfWork = new UnitOfWork();
     }
 
     public Response handlePost(Request request){
@@ -61,7 +61,7 @@ public class UserController {
         user.setToken("mtcgToken");
         user.setCoins(20);
 
-        HttpStatus httpStatus = userRepo.addUser(user, this.unitOfWork);
+        HttpStatus httpStatus = userRepo.addUser(user, unitOfWork);
 
         String content;
         switch (httpStatus){
@@ -152,13 +152,13 @@ public class UserController {
         User newUser = gson.fromJson(request.getBody(), User.class);
 
         try{
-            userRepo.updateUser(newUser, oldUser, this.unitOfWork);
-            this.unitOfWork.commit();
+            userRepo.updateUser(newUser, oldUser, unitOfWork);
+            unitOfWork.commit();
             return new Response(HttpStatus.OK,
                     ContentType.PLAIN_TEXT,
                     "User successfully updated.");
         }catch (SQLException exception){
-            this.unitOfWork.rollback();
+            unitOfWork.rollback();
             exception.printStackTrace();
         }
 
@@ -169,7 +169,7 @@ public class UserController {
 
     public User getUserWithUserName(String username){
         try{
-            return buildUser(this.userRepo.getUser(username, this.unitOfWork));
+            return buildUser(this.userRepo.getUser(username, unitOfWork));
         }catch(SQLException exception){
             exception.printStackTrace();
         }
