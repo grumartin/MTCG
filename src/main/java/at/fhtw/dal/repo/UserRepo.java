@@ -14,7 +14,7 @@ public class UserRepo {
     public HttpStatus addUser(User user, UnitOfWork unitOfWork){
         try{
             PreparedStatement preparedStatement = unitOfWork
-                    .getPreparedStatement("INSERT INTO users(username, password, coins, bio, token) VALUES(?,?,?,?,?)", false);
+                    .getPreparedStatement("INSERT INTO users(username, password, coins, bio, token) VALUES(?,?,?,?,?)", true);
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setInt(3, user.getCoins());
@@ -22,11 +22,21 @@ public class UserRepo {
             preparedStatement.setString(5, user.getToken());
 
             int affectedRows = preparedStatement.executeUpdate();
-            preparedStatement.close();
 
-            if(affectedRows > 0)
-                return HttpStatus.CREATED;
+            if(affectedRows > 0){
+                try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKey.next()){
+                        preparedStatement = unitOfWork.getPreparedStatement("INSERT INTO user_stats(user_id) VALUES(?)", false);
+                        preparedStatement.setInt(1, generatedKey.getInt(1));
+                        if(preparedStatement.executeUpdate() != 0)
+                            return HttpStatus.CREATED;
+                        else
+                            throw new RuntimeException("user_stats creation failed");
+                    }
+                }
+            }
         }catch(Exception exception){
+            exception.printStackTrace();
             if(exception.getClass().equals(RuntimeException.class))
                 return HttpStatus.INTERNAL_SERVER_ERROR;
         }
