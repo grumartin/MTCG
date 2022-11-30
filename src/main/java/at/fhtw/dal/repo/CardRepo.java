@@ -68,4 +68,20 @@ public class CardRepo {
 
         return preparedStatement.executeQuery();
     }
+
+    public ResultSet getCardsFromUserSpec(User user, UnitOfWork unitOfWork) throws SQLException{
+        PreparedStatement preparedStatement = unitOfWork
+                .getPreparedStatement("SELECT c_id, deck_id FROM cards WHERE user_id = ?", false);
+        preparedStatement.setInt(1, user.getUid());
+
+        return preparedStatement.executeQuery();
+    }
+
+    public ResultSet getCardById(String cardId, UnitOfWork unitOfWork) throws SQLException{
+        PreparedStatement preparedStatement = unitOfWork
+                .getPreparedStatement("SELECT * FROM cards WHERE c_id = ?", false);
+        preparedStatement.setString(1, cardId);
+
+        return preparedStatement.executeQuery();
+    }
 }

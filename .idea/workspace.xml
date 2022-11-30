@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Package Service implemented">
+    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Card Service implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/ServerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/pckg/PackageControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/pckg/PackageControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feat/pckg" />
+        <entry key="$PROJECT_DIR$" value="feat/cards" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,18 +76,18 @@
       <recent name="C:\Users\martin\Workspaces\MTCG\src\main\java\at\fhtw" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="at.fhtw.service.trading" />
       <recent name="at.fhtw.service.stats" />
       <recent name="at.fhtw.service.deck" />
       <recent name="at.fhtw.service.user" />
       <recent name="at.fhtw.service.card" />
-      <recent name="at.fhtw.service.pckg" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="at.fhtw.httpserver" />
       <recent name="at.fhtw.httpserver.response" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StatsControllerTest.testGetAllStats">
+  <component name="RunManager" selected="JUnit.TradingControllerTest.testExecuteDeal">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.fhtw.Main" />
       <module name="MTCG" />
@@ -107,65 +101,65 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StatsControllerTest.testGetAllStats" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TradingControllerTest.testExecuteDeal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.service.stats.*" />
+          <option name="PATTERN" value="at.fhtw.service.trading.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.stats" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.stats.StatsControllerTest" />
-      <option name="METHOD_NAME" value="testGetAllStats" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.trading" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.trading.TradingControllerTest" />
+      <option name="METHOD_NAME" value="testExecuteDeal" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StatsControllerTest.testGetStatsFromUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TradingControllerTest.testExecuteDealLockedCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.service.stats.*" />
+          <option name="PATTERN" value="at.fhtw.service.trading.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.stats" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.stats.StatsControllerTest" />
-      <option name="METHOD_NAME" value="testGetStatsFromUser" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.trading" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.trading.TradingControllerTest" />
+      <option name="METHOD_NAME" value="testExecuteDealLockedCard" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StatsControllerTest.testGetStatsWithoutAuth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TradingControllerTest.testExecuteDealWrongId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.service.stats.*" />
+          <option name="PATTERN" value="at.fhtw.service.trading.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.stats" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.stats.StatsControllerTest" />
-      <option name="METHOD_NAME" value="testGetStatsWithoutAuth" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.trading" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.trading.TradingControllerTest" />
+      <option name="METHOD_NAME" value="testExecuteDealWrongId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserControllerTest.testUserServiceCreateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TradingControllerTest.testRetrieveDeals" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.service.user.*" />
+          <option name="PATTERN" value="at.fhtw.service.trading.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.user" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.user.UserControllerTest" />
-      <option name="METHOD_NAME" value="testUserServiceCreateUser" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.trading" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.trading.TradingControllerTest" />
+      <option name="METHOD_NAME" value="testRetrieveDeals" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -173,11 +167,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StatsControllerTest.testGetAllStats" />
+        <item itemvalue="JUnit.TradingControllerTest.testExecuteDeal" />
+        <item itemvalue="JUnit.TradingControllerTest.testExecuteDealLockedCard" />
+        <item itemvalue="JUnit.TradingControllerTest.testExecuteDealWrongId" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.UserControllerTest.testUserServiceCreateUser" />
-        <item itemvalue="JUnit.StatsControllerTest.testGetStatsWithoutAuth" />
-        <item itemvalue="JUnit.StatsControllerTest.testGetStatsFromUser" />
+        <item itemvalue="JUnit.TradingControllerTest.testRetrieveDeals" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +206,7 @@
       <workItem from="1669401277015" duration="100000" />
       <workItem from="1669401388374" duration="3495000" />
       <workItem from="1669726363571" duration="13494000" />
-      <workItem from="1669800960257" duration="4637000" />
+      <workItem from="1669800960257" duration="15009000" />
     </task>
     <task id="LOCAL-00001" summary="Http Server implemented">
       <created>1666779600774</created>
@@ -228,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668456809219</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Card Service implemented">
+      <created>1669805679955</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669805679955</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +276,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Http Server implemented" />
     <MESSAGE value="Unit of Work implementation. UserService implementation completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Unit of Work implementation. UserService implementation completed" />
+    <MESSAGE value="Card Service implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Card Service implemented" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -8,6 +8,7 @@ import at.fhtw.service.echo.EchoService;
 import at.fhtw.service.pckg.PackageService;
 import at.fhtw.service.session.SessionService;
 import at.fhtw.service.stats.StatsService;
+import at.fhtw.service.trading.TradingService;
 import at.fhtw.service.user.UserService;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class Main {
         router.addService("/deck", new DeckService());
         router.addService("/stats", new StatsService());
         router.addService("/scoreboard", new StatsService());
+        router.addService("/tradings", new TradingService());
         return router;
     }
 }

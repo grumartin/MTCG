@@ -8,6 +8,7 @@ import at.fhtw.httpserver.server.Request;
 import at.fhtw.httpserver.server.Response;
 import at.fhtw.models.Card;
 import at.fhtw.models.Pckg;
+import at.fhtw.models.TradingDeal;
 import at.fhtw.models.User;
 import at.fhtw.service.user.UserController;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -80,5 +81,31 @@ public class CardController {
                     ContentType.PLAIN_TEXT,
                     "");
         }
+    }
+
+    public boolean checkIfUserOwnsCard(User user, String cardId){   //check if card is owned by user and not in deck
+        try {
+            ResultSet resultSetCards = new CardRepo().getCardsFromUserSpec(user, unitOfWork);
+            while(resultSetCards.next()){
+                if(resultSetCards.getString(1).equals(cardId) && resultSetCards.getInt(2) == 0)
+                    return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean checkRequirements(String cardId, TradingDeal tradingDeal) {        //check requirements for trading deal
+        try {
+            ResultSet resultSetCard = new CardRepo().getCardById(cardId, unitOfWork);
+            if(resultSetCard.next()){
+                if(resultSetCard.getInt(3) >= tradingDeal.getMinimumDamage())       //TODO check type
+                    return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
