@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Card Service implemented">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" afterDir="false" />
-    </list>
+    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Trading Service implemented" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -206,7 +201,7 @@
       <workItem from="1669401277015" duration="100000" />
       <workItem from="1669401388374" duration="3495000" />
       <workItem from="1669726363571" duration="13494000" />
-      <workItem from="1669800960257" duration="15009000" />
+      <workItem from="1669800960257" duration="15369000" />
     </task>
     <task id="LOCAL-00001" summary="Http Server implemented">
       <created>1666779600774</created>
@@ -229,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669805679955</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Trading Service implemented">
+      <created>1669819274131</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1669819274131</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,7 +279,8 @@
     <MESSAGE value="Http Server implemented" />
     <MESSAGE value="Unit of Work implementation. UserService implementation completed" />
     <MESSAGE value="Card Service implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Card Service implemented" />
+    <MESSAGE value="Trading Service implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Trading Service implemented" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
