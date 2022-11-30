@@ -64,7 +64,7 @@ public class TransactionController {
             }
             unitOfWork.commit();
             return new Response(HttpStatus.OK,
-                    ContentType.PLAIN_TEXT,
+                    ContentType.JSON,
                     new ObjectMapper().writeValueAsString(cards));
 
         }catch(Exception e){

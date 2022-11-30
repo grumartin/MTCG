@@ -60,4 +60,12 @@ public class CardRepo {
         if(affectedRows == 0)
             throw new RuntimeException("Cards couldnt be removed from package");
     }
+
+    public ResultSet getCardsFromUser(User user, UnitOfWork unitOfWork) throws SQLException{
+        PreparedStatement preparedStatement = unitOfWork
+                .getPreparedStatement("SELECT c_id, c_name, c_dmg FROM cards WHERE user_id = ?", false);
+        preparedStatement.setInt(1, user.getUid());
+
+        return preparedStatement.executeQuery();
+    }
 }

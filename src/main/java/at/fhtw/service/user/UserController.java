@@ -122,7 +122,7 @@ public class UserController {
 
         try{
             return new Response(HttpStatus.OK,
-                    ContentType.PLAIN_TEXT,
+                    ContentType.JSON,
                     mapper.writeValueAsString(user.getUserProperties()));
         }catch(IOException exception){
             exception.printStackTrace();

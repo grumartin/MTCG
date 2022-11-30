@@ -4,21 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Unit of Work implementation. UserService implementation completed">
+    <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Package Service implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/UnitOfWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/UnitOfWork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Package.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Pckg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/session/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/session/SessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/TransactionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/httpserver/ServerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/pckg/PackageControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/pckg/PackageControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,15 +26,15 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feat/poc" />
+        <entry key="$PROJECT_DIR$" value="feat/pckg" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -86,15 +82,18 @@
       <recent name="C:\Users\martin\Workspaces\MTCG\src\main\java\at\fhtw" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="at.fhtw.service.stats" />
+      <recent name="at.fhtw.service.deck" />
+      <recent name="at.fhtw.service.user" />
+      <recent name="at.fhtw.service.card" />
       <recent name="at.fhtw.service.pckg" />
-      <recent name="at.fhtw.httpserver" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="at.fhtw.httpserver" />
       <recent name="at.fhtw.httpserver.response" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PackageControllerTest.testAcquireCardsPackage">
+  <component name="RunManager" selected="JUnit.StatsControllerTest.testGetAllStats">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.fhtw.Main" />
       <module name="MTCG" />
@@ -108,65 +107,65 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PackageControllerTest.testAcquireCardsPackage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StatsControllerTest.testGetAllStats" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.service.pckg.*" />
+          <option name="PATTERN" value="at.fhtw.service.stats.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.pckg" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.pckg.PackageControllerTest" />
-      <option name="METHOD_NAME" value="testAcquireCardsPackage" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.stats" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.stats.StatsControllerTest" />
+      <option name="METHOD_NAME" value="testGetAllStats" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PackageControllerTest.testAcquireCardsPackageWithoutAuth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StatsControllerTest.testGetStatsFromUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.service.pckg.*" />
+          <option name="PATTERN" value="at.fhtw.service.stats.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.pckg" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.pckg.PackageControllerTest" />
-      <option name="METHOD_NAME" value="testAcquireCardsPackageWithoutAuth" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.stats" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.stats.StatsControllerTest" />
+      <option name="METHOD_NAME" value="testGetStatsFromUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PackageControllerTest.testCreatePackage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StatsControllerTest.testGetStatsWithoutAuth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.service.pckg.*" />
+          <option name="PATTERN" value="at.fhtw.service.stats.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.pckg" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.pckg.PackageControllerTest" />
-      <option name="METHOD_NAME" value="testCreatePackage" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.stats" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.stats.StatsControllerTest" />
+      <option name="METHOD_NAME" value="testGetStatsWithoutAuth" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PackageControllerTest.testCreatePackageDuplicateCards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserControllerTest.testUserServiceCreateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.fhtw.service.pckg.*" />
+          <option name="PATTERN" value="at.fhtw.service.user.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.pckg" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.pckg.PackageControllerTest" />
-      <option name="METHOD_NAME" value="testCreatePackageDuplicateCards" />
+      <option name="PACKAGE_NAME" value="at.fhtw.service.user" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.user.UserControllerTest" />
+      <option name="METHOD_NAME" value="testUserServiceCreateUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,11 +173,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PackageControllerTest.testAcquireCardsPackage" />
-        <item itemvalue="JUnit.PackageControllerTest.testCreatePackage" />
+        <item itemvalue="JUnit.StatsControllerTest.testGetAllStats" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.PackageControllerTest.testAcquireCardsPackageWithoutAuth" />
-        <item itemvalue="JUnit.PackageControllerTest.testCreatePackageDuplicateCards" />
+        <item itemvalue="JUnit.UserControllerTest.testUserServiceCreateUser" />
+        <item itemvalue="JUnit.StatsControllerTest.testGetStatsWithoutAuth" />
+        <item itemvalue="JUnit.StatsControllerTest.testGetStatsFromUser" />
       </list>
     </recent_temporary>
   </component>
@@ -210,6 +209,10 @@
       <workItem from="1668856409067" duration="395000" />
       <workItem from="1668966621458" duration="11438000" />
       <workItem from="1669023323617" duration="6281000" />
+      <workItem from="1669401277015" duration="100000" />
+      <workItem from="1669401388374" duration="3495000" />
+      <workItem from="1669726363571" duration="13494000" />
+      <workItem from="1669800960257" duration="4637000" />
     </task>
     <task id="LOCAL-00001" summary="Http Server implemented">
       <created>1666779600774</created>
@@ -242,7 +245,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feat/pckg" />
+                        <option value="feat/cards" />
                       </list>
                     </value>
                   </entry>
@@ -275,15 +278,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Unit of Work implementation. UserService implementation completed" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="at.fhtw.service.pckg.PackageController" memberName="packageRepo" />
