@@ -37,7 +37,7 @@ public class TradingController {
         if(!(new CardController().checkIfUserOwnsCard(user, tradingDeal.getCardToTrade())))     //The deal contains a card that is not owned by the user or locked in the deck
             return new Response(HttpStatus.FORBIDDEN,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "The deal contains a card that is not owned by the user or locked in the deck.");
 
         TradingRepo tradingRepo = new TradingRepo();
         try {
@@ -45,13 +45,13 @@ public class TradingController {
             if(resultSet.next())
                 return new Response(HttpStatus.CONFLICT,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "A deal with this deal ID already exists.");
 
             tradingRepo.createDeal(tradingDeal, user, unitOfWork);      //create trading deal
             unitOfWork.commit();
-            return new Response(HttpStatus.OK,
+            return new Response(HttpStatus.CREATED,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Trading deal successfully created");
         } catch (SQLException e) {
             e.printStackTrace();
             unitOfWork.rollback();
@@ -72,7 +72,7 @@ public class TradingController {
             if(!resultSet.next())
                 return new Response(HttpStatus.NOT_FOUND,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "The provided deal ID was not found.");
 
             TradingDeal tradingDeal = new TradingDeal(resultSet.getString(1),
                     resultSet.getString(2),
@@ -83,14 +83,14 @@ public class TradingController {
             if(!(new CardController().checkIfUserOwnsCard(user, cardId)) || !(new CardController().checkRequirements(cardId, tradingDeal)))     //check if card is owned by user and not locked in deck
                 return new Response(HttpStatus.FORBIDDEN,                                                                       //and meets the requirements
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "The offered card is not owned by the user, or the requirements are not met (Type, MinimumDamage), or the offered card is locked in the deck.");
 
             tradingRepo.executeTrade(tradingDeal, user, cardId, unitOfWork);        //execute deal
             tradingRepo.deleteDeal(tradingDealId, unitOfWork);                      //delete deal
             unitOfWork.commit();
             return new Response(HttpStatus.OK,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Trading deal successfully executed.");
         } catch (SQLException e) {
             e.printStackTrace();
             unitOfWork.rollback();
@@ -116,7 +116,7 @@ public class TradingController {
             if(deals.isEmpty()) {     //No available deals
                 return new Response(HttpStatus.NO_CONTENT,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "The request was fine, but there are no trading deals available");
             }else{
                 return new Response(HttpStatus.OK,
                         ContentType.JSON,
@@ -142,19 +142,19 @@ public class TradingController {
             if(!resultSet.next())
                 return new Response(HttpStatus.NOT_FOUND,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "The provided deal ID was not found.");
 
 
             if(!(new CardController().checkIfUserOwnsCard(user, resultSet.getString(2))))     //check if deal contains card from user
                 return new Response(HttpStatus.FORBIDDEN,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "The deal contains a card that is not owned by the user.");
 
             tradingRepo.deleteDeal(tradingDealId, unitOfWork);
             unitOfWork.commit();
             return new Response(HttpStatus.OK,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Trading deal successfully deleted");
         } catch (SQLException e) {
             e.printStackTrace();
             unitOfWork.rollback();

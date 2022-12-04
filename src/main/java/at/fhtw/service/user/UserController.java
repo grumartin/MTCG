@@ -110,11 +110,11 @@ public class UserController {
             case NOT_FOUND:
                 return new Response(HttpStatus.NOT_FOUND,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "User not found.");
             case UNAUTHORIZED:
                 return new Response(HttpStatus.UNAUTHORIZED,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "Authentication information is missing or invalid");
         }
 
         List<String> pathParts = request.getPathParts();
@@ -139,11 +139,11 @@ public class UserController {
             case NOT_FOUND:
                 return new Response(HttpStatus.NOT_FOUND,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "User not found.");
             case UNAUTHORIZED:
                 return new Response(HttpStatus.UNAUTHORIZED,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "Authentication information is missing or invalid");
         }
 
 

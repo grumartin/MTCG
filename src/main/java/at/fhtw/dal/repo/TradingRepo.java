@@ -28,7 +28,7 @@ public class TradingRepo {
         preparedStatement.setString(1, tradingDeal.getId());
         preparedStatement.setString(2, tradingDeal.getCardToTrade());
         preparedStatement.setInt(3, user.getUid());
-        preparedStatement.setString(4, tradingDeal.getType());
+        preparedStatement.setString(4, tradingDeal.getTypeString());
         preparedStatement.setInt(5, tradingDeal.getMinimumDamage());
 
         int affectedRows = preparedStatement.executeUpdate();

@@ -27,6 +27,10 @@ public class User {
         this.bio = bio;
         this.token = token;
     }
+
+    public User() {
+    }
+
     public int getUid() {
         return uid;
     }

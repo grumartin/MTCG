@@ -20,12 +20,12 @@ class TradingControllerTest {
         urlConnection.setDoOutput(true);
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        printWriter.write("{\"Id\": \"6cd85277-4590-49d4-b0cf-ba0a921faad0\", \"CardToTrade\": \"b2237eca-0271-43bd-87f6-b22f70d42ca4\", \"Type\": \"monster\", \"MinimumDamage\": 15}");
+        printWriter.write("{\"Id\": \"6cd85277-4590-49d4-b0cf-ba0a921faad0\", \"CardToTrade\": \"4a2757d6-b1c3-47ac-b9a3-91deab093531\", \"Type\": \"monster\", \"MinimumDamage\": 15}");
         printWriter.close();
 
         int responseCode = urlConnection.getResponseCode();
 
-        assertEquals(HttpURLConnection.HTTP_OK, responseCode);
+        assertEquals(HttpURLConnection.HTTP_CREATED, responseCode);
     }
 
     @Test
@@ -53,7 +53,7 @@ class TradingControllerTest {
         urlConnection.setDoOutput(true);
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        printWriter.write("{\"Id\": \"6cd85277-4590-49d4-b0cf-ba0a921faad0\", \"CardToTrade\": \"e85e3976-7c86-4d06-9a80-641c2019a79f\", \"Type\": \"monster\", \"MinimumDamage\": 15}");
+        printWriter.write("{\"Id\": \"6cd85277-4590-49d4-b0cf-ba0a921faad0\", \"CardToTrade\": \"9e8238a4-8a7a-487f-9f7d-a8c97899eb48\", \"Type\": \"monster\", \"MinimumDamage\": 15}");
         printWriter.close();
 
         int responseCode = urlConnection.getResponseCode();
@@ -136,7 +136,7 @@ class TradingControllerTest {
         URL url = new URL("http://localhost:10001/tradings");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
-        urlConnection.setRequestProperty("Authorization", "Basic Hans-mtcgToken");
+        urlConnection.setRequestProperty("Authorization", "Basic admin-mtcgToken");
 
         int responseCode = urlConnection.getResponseCode();
         if(responseCode == HttpURLConnection.HTTP_OK){
@@ -158,10 +158,17 @@ class TradingControllerTest {
         URL url = new URL("http://localhost:10001/tradings");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
-        urlConnection.setRequestProperty("Authorization", "Basic Hans-mtcgToken");
+        urlConnection.setRequestProperty("Authorization", "Basic admin-mtcgToken");
 
         int responseCode = urlConnection.getResponseCode();
-        assertEquals(HttpURLConnection.HTTP_NO_CONTENT, responseCode);
+        if(responseCode == HttpURLConnection.HTTP_NO_CONTENT){
+            InputStream inputStream = urlConnection.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            Assertions.assertEquals("The request was fine, but there are no trading deals available", bufferedReader.readLine());
+        }else {
+            Assertions.assertFalse(true);
+        }
     }
 
     @Test
@@ -173,7 +180,7 @@ class TradingControllerTest {
         urlConnection.setDoOutput(true);
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        printWriter.write("dfdd758f-649c-40f9-ba3a-8657f4b3439f");
+        printWriter.write("fc305a7a-36f7-4d30-ad27-462ca0445649");
         printWriter.close();
 
         int responseCode = urlConnection.getResponseCode();
@@ -205,7 +212,7 @@ class TradingControllerTest {
         urlConnection.setDoOutput(true);
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        printWriter.write("1cb6ab86-bdb2-47e5-b6e4-68c5ab389334");
+        printWriter.write("b2237eca-0271-43bd-87f6-b22f70d42ca4");
         printWriter.close();
 
         int responseCode = urlConnection.getResponseCode();

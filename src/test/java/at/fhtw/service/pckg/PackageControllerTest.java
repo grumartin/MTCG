@@ -64,7 +64,7 @@ class PackageControllerTest {
         URL url = new URL("http://localhost:10001/transactions/packages");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
-        urlConnection.setRequestProperty("Authorization", "Basic Hans-mtcgToken");
+        urlConnection.setRequestProperty("Authorization", "Basic Olaf-mtcgToken");
 
         int responseCode = urlConnection.getResponseCode();
         if(responseCode == HttpURLConnection.HTTP_OK){

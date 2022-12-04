@@ -13,7 +13,7 @@ public class StatsService implements Service {
         Response response;
         switch (request.getMethod()){
             case GET:
-                if(request.getServiceRoute().equals("/scoreboard"))
+                if(request.getServiceRoute().equals("/score"))
                     response = statsController.handleGetScoreboard(request);
                 else if(request.getServiceRoute().equals("/stats"))
                     response = statsController.handleGetStats(request);

@@ -36,7 +36,7 @@ public class UserRepo {
                 }
             }
         }catch(Exception exception){
-            exception.printStackTrace();
+            //exception.printStackTrace();
             if(exception.getClass().equals(RuntimeException.class))
                 return HttpStatus.INTERNAL_SERVER_ERROR;
         }
@@ -49,6 +49,19 @@ public class UserRepo {
 
         preparedStatement.setString(1, username);
         return preparedStatement.executeQuery();
+    }
+
+    public String getUserById(int id, UnitOfWork unitOfWork) throws SQLException{
+        PreparedStatement preparedStatement = unitOfWork
+                .getPreparedStatement("SELECT username FROM users WHERE u_id = ?", false);
+
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            return resultSet.getString(1);
+        }else{
+            throw new SQLException("Get User failed");
+        }
     }
 
     public void updateUser(User newUser, User oldUser, UnitOfWork unitOfWork) throws SQLException{

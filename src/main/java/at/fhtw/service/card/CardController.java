@@ -19,10 +19,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static at.fhtw.service.Service.unitOfWork;
 
@@ -39,6 +36,10 @@ public class CardController {
 
         for (Card card : cardsList) {
             card.setPckg_id(pckg_id);
+            if(card.getC_name().contains("Spell"))
+                card.setType("spell");
+            else
+                card.setType("monster");
             HttpStatus cardStatus = this.cardRepo.addCard(card, unitOfWork);
             if(cardStatus != HttpStatus.CREATED)
                 return cardStatus;
@@ -51,7 +52,7 @@ public class CardController {
         if(request.getAuthorizedClient() == null)
             return new Response(HttpStatus.UNAUTHORIZED,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Authentication information is missing or invalid");
 
         User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
 
@@ -68,7 +69,7 @@ public class CardController {
             if(cards.isEmpty()) {     //User has no cards
                 return new Response(HttpStatus.NO_CONTENT,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "The request was fine, but the user doesn't have any cards");
             }else{
                 return new Response(HttpStatus.OK,
                         ContentType.JSON,
@@ -100,7 +101,7 @@ public class CardController {
         try {
             ResultSet resultSetCard = new CardRepo().getCardById(cardId, unitOfWork);
             if(resultSetCard.next()){
-                if(resultSetCard.getInt(3) >= tradingDeal.getMinimumDamage())       //TODO check type
+                if(resultSetCard.getInt(3) >= tradingDeal.getMinimumDamage() && Objects.equals(resultSetCard.getString(7), tradingDeal.getTypeString()))
                     return true;
             }
         } catch (SQLException e) {
