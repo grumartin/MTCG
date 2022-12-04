@@ -6,21 +6,27 @@ import java.util.Map;
 public class TradingDeal {
     private String Id;
     private String CardToTrade;
-    private String Type;
+    private CardType type;
     private int MinimumDamage;
     private int Seller;
 
     public TradingDeal(String id, String cardToTrade, String type, int minimumDamage) {
         Id = id;
         CardToTrade = cardToTrade;
-        Type = type;
+        if(type.equals("monster"))
+            this.type = CardType.Monster;
+        else
+            this.type = CardType.Spell;
         MinimumDamage = minimumDamage;
     }
 
     public TradingDeal(String id, String cardToTrade, int seller, String type, int minimumDamage) {
         Id = id;
         CardToTrade = cardToTrade;
-        Type = type;
+        if(type.equals("monster"))
+            this.type = CardType.Monster;
+        else
+            this.type = CardType.Spell;
         Seller = seller;
         MinimumDamage = minimumDamage;
     }
@@ -49,12 +55,22 @@ public class TradingDeal {
         CardToTrade = cardToTrade;
     }
 
-    public String getType() {
-        return Type;
+    public CardType getType() {
+        return type;
+    }
+
+    public String getTypeString(){
+        if(this.type.equals(CardType.Monster))
+            return "monster";
+        else
+            return "spell";
     }
 
     public void setType(String type) {
-        Type = type;
+        if(type.equals("monster"))
+            this.type = CardType.Monster;
+        else
+            this.type = CardType.Spell;
     }
 
     public int getMinimumDamage() {
@@ -69,7 +85,7 @@ public class TradingDeal {
         return new HashMap<>(){{
             put("Id", getId());
             put("CardToTrade", getCardToTrade());
-            put("Type", getType());
+            put("Type", getTypeString());
             put("MinimumDamage", Integer.toString(getMinimumDamage()));
         }};
     }

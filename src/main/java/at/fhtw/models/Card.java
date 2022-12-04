@@ -15,17 +15,38 @@ public class Card {
     private float c_dmg;
     private int pckg_id;
     private int user_id;
-    private int stack_id;
     private int deck_id;
+    private CardType type;
 
-    public Card(String c_id, String c_name, float c_dmg, int pckg_id, int user_id, int stack_id, int deck_id) {
+    public Card(String c_id, String c_name, float c_dmg, int pckg_id, int user_id, int deck_id) {
         this.c_id = c_id;
         this.c_name = c_name;
         this.c_dmg = c_dmg;
         this.pckg_id = pckg_id;
         this.user_id = user_id;
-        this.stack_id = stack_id;
         this.deck_id = deck_id;
+    }
+
+    public Card(String c_id, String c_name, float c_dmg, int deck_id, String type) {
+        this.c_id = c_id;
+        this.c_name = c_name;
+        this.c_dmg = c_dmg;
+        this.deck_id = deck_id;
+        if(type.equals("monster"))
+            this.type = CardType.Monster;
+        else
+            this.type = CardType.Spell;
+    }
+
+    public CardType getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        if(type.equals("monster"))
+            this.type = CardType.Monster;
+        else
+            this.type = CardType.Spell;
     }
 
     public Card(String c_id, String c_name, float c_dmg) {
@@ -74,14 +95,6 @@ public class Card {
         this.user_id = user_id;
     }
 
-    public int getStack_id() {
-        return stack_id;
-    }
-
-    public void setStack_id(int stack_id) {
-        this.stack_id = stack_id;
-    }
-
     public int getDeck_id() {
         return deck_id;
     }
@@ -97,5 +110,12 @@ public class Card {
             put("Name", getC_name());
             put("Damage", Float.toString(getC_dmg()));
         }};
+    }
+
+    public String getTypeString() {
+        if(this.type.equals(CardType.Monster))
+            return "monster";
+        else
+            return "spell";
     }
 }

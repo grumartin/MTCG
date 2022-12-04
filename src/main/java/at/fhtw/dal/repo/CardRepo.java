@@ -14,11 +14,12 @@ public class CardRepo {
     public HttpStatus addCard(Card card, UnitOfWork unitOfWork){
         try{
             PreparedStatement preparedStatement = unitOfWork
-                    .getPreparedStatement("INSERT INTO cards(c_id, c_name, c_dmg, pckg_id) VALUES(?,?,?,?)", false);
+                    .getPreparedStatement("INSERT INTO cards(c_id, c_name, c_dmg, pckg_id, type) VALUES(?,?,?,?, CAST(? AS CardType))", false);
             preparedStatement.setString(1, card.getC_id());
             preparedStatement.setString(2, card.getC_name());
             preparedStatement.setInt(3, (int)card.getC_dmg());
             preparedStatement.setInt(4, card.getPckg_id());
+            preparedStatement.setString(5, card.getTypeString());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -83,5 +84,18 @@ public class CardRepo {
         preparedStatement.setString(1, cardId);
 
         return preparedStatement.executeQuery();
+    }
+
+    public void transferCard(String cardId, int newOwnerId, int newDeckId, UnitOfWork unitOfWork) throws SQLException {
+        PreparedStatement preparedStatement = unitOfWork
+                .getPreparedStatement("UPDATE cards SET user_id = ?, deck_id = ? WHERE c_id = ?", false);
+        preparedStatement.setInt(1, newOwnerId);
+        preparedStatement.setInt(2, newDeckId);
+        preparedStatement.setString(3, cardId);
+
+        int affectedRows = preparedStatement.executeUpdate();
+
+        if(affectedRows == 0)
+            throw new RuntimeException("Card could not be transferred");
     }
 }

@@ -25,14 +25,14 @@ public class TransactionController {
         if(request.getAuthorizedClient() == null)
             return new Response(HttpStatus.UNAUTHORIZED,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Authentication information is missing or invalid");
 
         User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
 
         if(user.getCoins() < 5)
             return new Response(HttpStatus.FORBIDDEN,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Not enough money for buying a card package");
 
         try{
             ResultSet resultSetPackage = new PackageRepo().acquirePackage(user, unitOfWork);       //get random package
@@ -44,7 +44,7 @@ public class TransactionController {
             }else{  //No card package available
                 return new Response(HttpStatus.NOT_FOUND,
                         ContentType.PLAIN_TEXT,
-                        "");
+                        "No card package available for buying");
             }
 
             CardRepo cardRepo = new CardRepo();

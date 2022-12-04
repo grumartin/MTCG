@@ -21,13 +21,13 @@ public class PackageController {
         if(request.getAuthorizedClient() == null)
             return new Response(HttpStatus.UNAUTHORIZED,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Authentication information is missing or invalid");
 
 
         if(!(request.getAuthorizedClient().getUsername().equals("admin")))
             return new Response(HttpStatus.FORBIDDEN,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Provided user is not \"admin\"");
 
 
         Pckg newPckg = createPackage();
@@ -37,15 +37,18 @@ public class PackageController {
                     "");
 
         HttpStatus result = new CardController().createCards(request, newPckg.getP_id());
+        String content;
         if(result == HttpStatus.CREATED){
             unitOfWork.commit();
+            content = "Package and cards successfully created";
         }else{
             unitOfWork.rollback();
+            content = "At least one card in the packages already exists";
         }
 
         return new Response(result,
                             ContentType.PLAIN_TEXT,
-                            "");
+                            content);
     }
 
     public Pckg createPackage(){

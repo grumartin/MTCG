@@ -24,7 +24,7 @@ public class StatsController {
         if(request.getAuthorizedClient() == null)
             return new Response(HttpStatus.UNAUTHORIZED,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Authentication information is missing or invalid");
 
         User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
 
@@ -54,7 +54,7 @@ public class StatsController {
         if(request.getAuthorizedClient() == null)
             return new Response(HttpStatus.UNAUTHORIZED,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Authentication information is missing or invalid");
 
         try {
             ResultSet resultSetStats = new StatsRepo().getAllStats(unitOfWork);

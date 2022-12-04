@@ -12,7 +12,7 @@ public class TradingService implements Service {
         if(request.getAuthorizedClient() == null)
             return new Response(HttpStatus.UNAUTHORIZED,
                     ContentType.PLAIN_TEXT,
-                    "");
+                    "Authentication information is missing or invalid");
 
         TradingController tradingController = new TradingController();
         Response response;

@@ -2,6 +2,7 @@ package at.fhtw.dal.repo;
 
 import at.fhtw.dal.UnitOfWork;
 import at.fhtw.httpserver.http.HttpStatus;
+import at.fhtw.models.Battle;
 import at.fhtw.models.User;
 
 import java.sql.PreparedStatement;
@@ -47,7 +48,7 @@ public class DeckRepo {
 
     public ResultSet getCardsfromDeck(int deckId, UnitOfWork unitOfWork) throws SQLException{
         PreparedStatement preparedStatement = unitOfWork
-                .getPreparedStatement("SELECT c_id, c_name, c_dmg FROM cards WHERE deck_id = ?", false);
+                .getPreparedStatement("SELECT * FROM cards WHERE deck_id = ?", false);
         preparedStatement.setInt(1, deckId);
 
         return preparedStatement.executeQuery();
@@ -62,7 +63,18 @@ public class DeckRepo {
         if(result.next()){
             return result.getInt(1);
         }else{
-            throw new SQLException();
+            return -1;
         }
+    }
+
+    public void clearDeck(Battle battle, UnitOfWork unitOfWork) throws SQLException {
+        PreparedStatement preparedStatement = unitOfWork
+                .getPreparedStatement("UPDATE cards SET deck_id = NULL WHERE user_id = ? OR user_id = ?", false);
+        preparedStatement.setInt(1, battle.getPlayerA());
+        preparedStatement.setInt(2, battle.getPlayerB());
+
+        int affectedRows = preparedStatement.executeUpdate();
+        if(affectedRows == 0)
+            throw new SQLException("Update failed");
     }
 }
