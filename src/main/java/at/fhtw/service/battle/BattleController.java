@@ -1,12 +1,12 @@
 package at.fhtw.service.battle;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.dal.repo.*;
 import at.fhtw.httpserver.http.ContentType;
 import at.fhtw.httpserver.http.HttpStatus;
 import at.fhtw.httpserver.server.Request;
 import at.fhtw.httpserver.server.Response;
 import at.fhtw.models.*;
-import at.fhtw.service.card.CardController;
 import at.fhtw.service.deck.DeckController;
 import at.fhtw.service.user.UserController;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,10 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import static at.fhtw.service.Service.unitOfWork;
-
 public class BattleController {
     public BattleRepo battleRepo;
+    static final Object lock = new Object();
     public BattleController() {
         this.battleRepo = new BattleRepo();
     }
@@ -29,28 +28,36 @@ public class BattleController {
                     ContentType.PLAIN_TEXT,
                     "Authentication information is missing or invalid");
 
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
+        //new UserRepo().addDraw(unitOfWork);
 
         try{
-            Battle battle =  createBattle(user);
-            battleRepo.addUser(user, battle, unitOfWork);       //add user to battle
+            Battle battle;
+            synchronized (lock){
+                battle = createBattle(user, unitOfWork);
+                battleRepo.addUser(user, battle, unitOfWork);       //add user to
+                unitOfWork.commit();
+            }
+
             if(battle.getPlayerA() != 0 && battle.getPlayerB() != 0) {      //check if lobby is full
-                if (startBattle(battle)){
+                if (startBattle(battle, unitOfWork)){
                     battleRepo.setWinner(battle, unitOfWork);
-                    //clear deck
-                    new DeckRepo().clearDeck(battle, unitOfWork);
-                    unitOfWork.commit();
+                    new DeckRepo().clearDeck(battle, unitOfWork);       //clear deck
+                }else{
+                    //draw
+                    battleRepo.setWinner(battle, unitOfWork);
                 }
-                else{
-                    unitOfWork.rollback();      //TODO maybe increase total of user_stats
-                    return new Response(HttpStatus.OK,
-                            ContentType.PLAIN_TEXT,
-                            "");
-                }
-            }else
-                waitForBattle(battle);
+                //update total played games
+                new StatsRepo().updateTotal(battle.getPlayerA(), unitOfWork);
+                new StatsRepo().updateTotal(battle.getPlayerB(), unitOfWork);
+            }else{
+                waitForBattle(battle, unitOfWork);
+            }
 
             //get battle stats
+            if(unitOfWork.isClosed())
+                unitOfWork = new UnitOfWork();
             ResultSet resultSetBattle = battleRepo.getBattle(battle.getB_id(), unitOfWork);
             if(resultSetBattle.next()){
                 battle.setPlayerA(resultSetBattle.getInt(2));
@@ -93,11 +100,13 @@ public class BattleController {
                     throw new SQLException();
                 }
 
-                String winnerCardName;
-                if (winnerId.equals(cardA.getC_id()))
-                    winnerCardName = cardA.getC_name();
-                else
-                    winnerCardName = cardB.getC_name();
+                String winnerCardName = "Draw";
+                if(winnerId != null){
+                    if (winnerId.equals(cardA.getC_id()))
+                        winnerCardName = cardA.getC_name();
+                    else if(winnerId.equals(cardB.getC_id()))
+                        winnerCardName = cardB.getC_name();
+                }
 
                 rounds.add(new BattleRound(playerAName,
                         playerBName,
@@ -108,39 +117,54 @@ public class BattleController {
                         winnerCardName).getBattleRoundProperties());
             }
             //get winner
-            String winner = new UserRepo().getUserById(battle.getWinner(), unitOfWork);
-            rounds.add(
-                    new HashMap<>(){{
+            if(battle.getWinner() == -1 || battle.getWinner() == 0)
+                rounds.add(
+                        new HashMap<>(){{
+                            put("Winner:", "Draw => No Winner");
+                        }}
+                );
+            else{
+                String winner = new UserRepo().getUserById(battle.getWinner(), unitOfWork);
+                rounds.add(
+                        new HashMap<>(){{
                             put("Winner:", winner);
-                    }}
-            );
-
+                        }}
+                );
+            }
+            unitOfWork.commit();
+            unitOfWork.close();
             return new Response(HttpStatus.OK,
                     ContentType.JSON,
                     new ObjectMapper().writeValueAsString(rounds));
         }catch(Exception e){
             e.printStackTrace();
-            unitOfWork.rollback();
+            if(!unitOfWork.isClosed()){
+                unitOfWork.rollback();
+            }
+
         }
+        unitOfWork.close();
         return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                 ContentType.PLAIN_TEXT,
                 "");
     }
 
-    private void waitForBattle(Battle battle) throws InterruptedException, SQLException {
+    private void waitForBattle(Battle battle, UnitOfWork unitOfWork) throws InterruptedException, SQLException {
         for(int i = 0; i < 60; i++){
+            Thread.sleep(1000);
+            if(unitOfWork.isClosed())
+                return;
             if(battleRepo.checkFinished(battle, unitOfWork))
                 return;
-            Thread.sleep(1000);
         }
     }
 
-    private boolean startBattle(Battle battle) throws SQLException {
+    private boolean startBattle(Battle battle, UnitOfWork unitOfWork) throws SQLException {
         System.out.println("Battle started");
         //get cards from players
         DeckController deckController = new DeckController();
-        ResultSet rsDeckA = deckController.getDeckFromPlayer(battle.getPlayerA());
-        ResultSet rsDeckB = deckController.getDeckFromPlayer(battle.getPlayerB());
+        ResultSet rsDeckA = deckController.getDeckFromPlayer(battle.getPlayerA(), unitOfWork);
+        ResultSet rsDeckB = deckController.getDeckFromPlayer(battle.getPlayerB(), unitOfWork);
         if(rsDeckB == null || rsDeckA == null){
             return false;
         }
@@ -163,6 +187,9 @@ public class BattleController {
                     rsDeckB.getString(7)));
         }
 
+        int deckAId = deckA.get(0).getDeck_id();
+        int deckBId = deckB.get(0).getDeck_id();
+
         //play max 100 rounds
         StatsRepo statsRepo = new StatsRepo();
         CardRepo cardRepo = new CardRepo();
@@ -170,26 +197,19 @@ public class BattleController {
             //get random cards
             Card cardA = deckA.get(new Random().nextInt(deckA.size()));
             Card cardB = deckB.get(new Random().nextInt(deckB.size()));
-            Card winner;
 
             //start battle
             Card winnerCard = battleRound(cardA, cardB);
             if(winnerCard.equals(cardA)){       //PlayerA wins this round
                 //transfer card
-                winner = cardA;
                 deckB.remove(cardB);
                 deckA.add(cardB);
-                cardB.setDeck_id(cardA.getDeck_id());
-                cardRepo.transferCard(cardB.getC_id(), battle.getPlayerA(), cardB.getDeck_id(), unitOfWork);
-            }else{                              //PlayerB wins this round
-                winner = cardB;
+            }else if(winnerCard.equals(cardB)){                              //PlayerB wins this round
                 deckA.remove(cardA);
                 deckB.add(cardA);
-                cardA.setDeck_id(cardB.getDeck_id());
-                cardRepo.transferCard(cardA.getC_id(), battle.getPlayerB(), cardA.getDeck_id(), unitOfWork);
             }
 
-            battleRepo.addRound(battle, cardA, cardB, winner, unitOfWork);
+            battleRepo.addRound(battle, cardA, cardB, winnerCard, unitOfWork);
 
             //check for winner
             if(deckA.isEmpty()){        //PlayerB won
@@ -197,17 +217,30 @@ public class BattleController {
                 statsRepo.updateStats(battle.getPlayerA(), false, unitOfWork);
                 statsRepo.updateStats(battle.getPlayerB(), true, unitOfWork);
                 battle.setWinner(battle.getPlayerB());
+
+                //transfer cards to winner
+                for(Card card : deckB){
+                    if(card.getDeck_id() != deckBId)        //check if card is from opponent
+                        cardRepo.transferCard(card.getC_id(), battle.getPlayerB(), deckBId, unitOfWork);
+                }
                 return true;
             }else if(deckB.isEmpty()){        //PlayerA won
                 //update stats
                 statsRepo.updateStats(battle.getPlayerA(), true, unitOfWork);
                 statsRepo.updateStats(battle.getPlayerB(), false, unitOfWork);
                 battle.setWinner(battle.getPlayerA());
+
+                //transfer cards to winner
+                for(Card card : deckA){
+                    if(card.getDeck_id() != deckAId)        //check if card is from opponent
+                        cardRepo.transferCard(card.getC_id(), battle.getPlayerA(), deckAId, unitOfWork);
+                }
                 return true;
             }
         }
 
         //draw
+        battle.setWinner(-1);
         return false;
     }
 
@@ -233,8 +266,10 @@ public class BattleController {
 
         if(calcDmg(cardA, cardB) > calcDmg(cardB, cardA))
             return cardA;
-        else
+        else if(calcDmg(cardA, cardB) < calcDmg(cardB, cardA))
             return cardB;
+        else
+            return new Card(null, "Draw", 0);
     }
 
     private float calcDmg(Card self, Card opponent) {
@@ -271,20 +306,24 @@ public class BattleController {
 
         if(cardA.getC_dmg() > cardB.getC_dmg())
             return cardA;
-        else
+        else if(cardA.getC_dmg() < cardB.getC_dmg())
             return cardB;
+        else
+            return new Card(null, "Draw", 0);
     }
 
-    private Battle createBattle(User user) throws Exception {
+    private Battle createBattle(User user, UnitOfWork unitOfWork) throws Exception {
         //check if there is already an open lobby
         ResultSet resultSetBattle = battleRepo.fetchLobby(unitOfWork);
         Battle battle = new Battle();
         if(resultSetBattle.next()) {     //lobby exists
             battle.setB_id(resultSetBattle.getInt(1));
             battle.setPlayerA(resultSetBattle.getInt(2));
+            //battle.setPlayerB(user.getUid());
             return battle;
         }
         battle.setB_id(battleRepo.createLobby(unitOfWork));  //no lobby exists, create new one
+        //battle.setPlayerA(user.getUid());
         return battle;
     }
 }

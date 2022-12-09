@@ -1,5 +1,6 @@
 package at.fhtw.service.card;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.dal.repo.CardRepo;
 import at.fhtw.dal.repo.PackageRepo;
 import at.fhtw.httpserver.http.ContentType;
@@ -21,8 +22,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import static at.fhtw.service.Service.unitOfWork;
-
 public class CardController {
     private CardRepo cardRepo;
 
@@ -30,7 +29,7 @@ public class CardController {
         this.cardRepo = new CardRepo();
     }
 
-    public HttpStatus createCards(Request request, int pckg_id) {
+    public HttpStatus createCards(Request request, int pckg_id, UnitOfWork unitOfWork) {
         Card[] cards = new Gson().fromJson(request.getBody(), Card[].class);
         List<Card> cardsList = Arrays.asList(cards);
 
@@ -54,10 +53,12 @@ public class CardController {
                     ContentType.PLAIN_TEXT,
                     "Authentication information is missing or invalid");
 
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
 
         try {
             ResultSet resultSetCards = new CardRepo().getCardsFromUser(user, unitOfWork);
+            unitOfWork.close();
 
             List<Map<String, String>> cards = new ArrayList<Map<String, String>>();
             while(resultSetCards.next()){
@@ -78,17 +79,18 @@ public class CardController {
 
         }catch(Exception e){
             e.printStackTrace();
+            unitOfWork.close();
             return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                     ContentType.PLAIN_TEXT,
                     "");
         }
     }
 
-    public boolean checkIfUserOwnsCard(User user, String cardId){   //check if card is owned by user and not in deck
+    public boolean checkIfUserOwnsCard(User user, String cardId, UnitOfWork unitOfWork){   //check if card is owned by user and not in deck
         try {
-            ResultSet resultSetCards = new CardRepo().getCardsFromUserSpec(user, unitOfWork);
-            while(resultSetCards.next()){
-                if(resultSetCards.getString(1).equals(cardId) && resultSetCards.getInt(2) == 0)
+            ResultSet resultSetCards = new CardRepo().getCardsFromUserSpec(user, cardId, unitOfWork);
+            if(resultSetCards.next()){
+                if(resultSetCards.getInt(1) == 0)
                     return true;
             }
         } catch (SQLException e) {
@@ -97,11 +99,11 @@ public class CardController {
         return false;
     }
 
-    public boolean checkRequirements(String cardId, TradingDeal tradingDeal) {        //check requirements for trading deal
+    public boolean checkRequirements(String cardId, TradingDeal tradingDeal, UnitOfWork unitOfWork) {        //check requirements for trading deal
         try {
             ResultSet resultSetCard = new CardRepo().getCardById(cardId, unitOfWork);
             if(resultSetCard.next()){
-                if(resultSetCard.getInt(3) >= tradingDeal.getMinimumDamage() && Objects.equals(resultSetCard.getString(7), tradingDeal.getTypeString()))
+                if(resultSetCard.getInt(3) >= tradingDeal.getMinimumDamage() && resultSetCard.getString(7).equals(tradingDeal.getTypeString()))
                     return true;
             }
         } catch (SQLException e) {

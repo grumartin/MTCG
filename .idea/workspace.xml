@@ -5,30 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Battle Service">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/UnitOfWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/UnitOfWork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/DeckRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/DeckRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/PackageRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/PackageRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/StatsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/StatsRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/TradingRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/TradingRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/server/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/server/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/CardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/CardType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/TradingDeal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/TradingDeal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/battle/BattleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/battle/BattleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/deck/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/deck/DeckController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/session/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/session/SessionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/stats/StatsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/stats/StatsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/stats/StatsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/stats/StatsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/trading/TradingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/trading/TradingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/trading/TradingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/trading/TradingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/deck/DeckControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/deck/DeckControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/pckg/PackageControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/pckg/PackageControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/trading/TradingControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/trading/TradingControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/user/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/user/UserControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,54 +121,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BattleControllerTest.testGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="MTCG" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.fhtw.service.battle.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.battle" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.battle.BattleControllerTest" />
-      <option name="METHOD_NAME" value="testGame" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BattleControllerTest.testGamePlayerTwo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="MTCG" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.fhtw.service.battle.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.battle" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.battle.BattleControllerTest" />
-      <option name="METHOD_NAME" value="testGamePlayerTwo" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeckControllerTest.testConfigureDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="MTCG" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.fhtw.service.deck.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.fhtw.service.deck" />
-      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.deck.DeckControllerTest" />
-      <option name="METHOD_NAME" value="testConfigureDeck" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PackageControllerTest.testAcquireCardsPackage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MTCG" />
       <extension name="coverage">
@@ -185,13 +137,61 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TradingControllerTest.testCreateTradingDeal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MTCG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.fhtw.service.trading.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.fhtw.service.trading" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.trading.TradingControllerTest" />
+      <option name="METHOD_NAME" value="testCreateTradingDeal" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.testUserServiceCreateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MTCG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.fhtw.service.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.fhtw.service.user" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.user.UserControllerTest" />
+      <option name="METHOD_NAME" value="testUserServiceCreateUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.testUserServiceGetUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MTCG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.fhtw.service.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.fhtw.service.user" />
+      <option name="MAIN_CLASS_NAME" value="at.fhtw.service.user.UserControllerTest" />
+      <option name="METHOD_NAME" value="testUserServiceGetUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.BattleControllerTest.testGamePlayerTwo" />
-        <item itemvalue="JUnit.BattleControllerTest.testGame" />
-        <item itemvalue="JUnit.DeckControllerTest.testConfigureDeck" />
+        <item itemvalue="JUnit.TradingControllerTest.testCreateTradingDeal" />
         <item itemvalue="JUnit.PackageControllerTest.testAcquireCardsPackage" />
+        <item itemvalue="JUnit.UserControllerTest.testUserServiceCreateUser" />
+        <item itemvalue="JUnit.UserControllerTest.testUserServiceGetUser" />
       </list>
     </recent_temporary>
   </component>
@@ -233,7 +233,13 @@
       <workItem from="1669989435546" duration="2372000" />
       <workItem from="1669991929728" duration="92000" />
       <workItem from="1670073430467" duration="10493000" />
-      <workItem from="1670149405054" duration="6761000" />
+      <workItem from="1670149405054" duration="7096000" />
+      <workItem from="1670261716095" duration="11000" />
+      <workItem from="1670318367823" duration="147000" />
+      <workItem from="1670339632049" duration="4802000" />
+      <workItem from="1670515516586" duration="17543000" />
+      <workItem from="1670574923042" duration="5055000" />
+      <workItem from="1670582212538" duration="2203000" />
     </task>
     <task id="LOCAL-00001" summary="Http Server implemented">
       <created>1666779600774</created>
@@ -270,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669819658425</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Battle Service">
+      <created>1670156421844</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670156421844</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,14 +338,13 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/server/Response.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.sql.SQLException" package="java.sql" />
           <option name="timeStamp" value="11" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.postgresql.util.PSQLException" package="org.postgresql.util" />
+          <option name="timeStamp" value="28" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -340,9 +352,19 @@
       <pinned-members>
         <PinnedItemInfo parentTag="at.fhtw.service.pckg.PackageController" memberName="packageRepo" />
         <PinnedItemInfo parentTag="java.io.PrintWriter" memberName="out" />
+        <PinnedItemInfo parentTag="at.fhtw.httpserver.server.Request" memberName="params" />
         <PinnedItemInfo parentTag="at.fhtw.models.Pckg" memberName="p_id" />
         <PinnedItemInfo parentTag="java.io.PrintWriter" memberName="lock" />
+        <PinnedItemInfo parentTag="at.fhtw.httpserver.server.Request" memberName="headerMap" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="bufferedReader.readLine()" />
+      </configuration>
+      <configuration name="Application">
+        <watch expression="request.body" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

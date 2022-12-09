@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
 public class UnitOfWork {
@@ -27,6 +28,23 @@ public class UnitOfWork {
             this.DBConnection.rollback();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void close()  {
+        try {
+            this.DBConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isClosed(){
+        try {
+            return this.DBConnection.isClosed();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return true;
         }
     }
 

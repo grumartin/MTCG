@@ -34,7 +34,7 @@ class UserControllerTest {
         urlConnection.setDoOutput(true);
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        printWriter.write("{\"Username\": \"Olaf\", \r\n \"Password\":\"12345\"}");
+        printWriter.write("{\"Username\": \"kienboec\", \r\n \"Password\":\"12345\"}");
         printWriter.close();
         InputStream inputStream = urlConnection.getInputStream();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

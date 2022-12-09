@@ -1,5 +1,6 @@
 package at.fhtw.service.pckg;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.dal.repo.CardRepo;
 import at.fhtw.dal.repo.PackageRepo;
 import at.fhtw.dal.repo.UserRepo;
@@ -18,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static at.fhtw.service.Service.unitOfWork;
-
 public class TransactionController {
     public Response handlePost(Request request){
         if(request.getAuthorizedClient() == null)
@@ -27,7 +26,8 @@ public class TransactionController {
                     ContentType.PLAIN_TEXT,
                     "Authentication information is missing or invalid");
 
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
 
         if(user.getCoins() < 5)
             return new Response(HttpStatus.FORBIDDEN,
@@ -63,12 +63,14 @@ public class TransactionController {
                         resultSetCards.getFloat(3)).getCardProperties());
             }
             unitOfWork.commit();
+            unitOfWork.close();
             return new Response(HttpStatus.OK,
                     ContentType.JSON,
                     new ObjectMapper().writeValueAsString(cards));
 
         }catch(Exception e){
             unitOfWork.rollback();
+            unitOfWork.close();
             e.printStackTrace();
             return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                     ContentType.PLAIN_TEXT,
