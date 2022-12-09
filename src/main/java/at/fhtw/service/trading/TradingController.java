@@ -1,5 +1,6 @@
 package at.fhtw.service.trading;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.dal.repo.CardRepo;
 import at.fhtw.dal.repo.TradingRepo;
 import at.fhtw.httpserver.http.ContentType;
@@ -20,11 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static at.fhtw.service.Service.unitOfWork;
-
 public class TradingController {
     public Response handlePostCreate(Request request) {
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
 
         TradingDeal tradingDeal =  new Gson().fromJson(request.getBody(), TradingDeal.class);
 
@@ -34,12 +34,13 @@ public class TradingController {
                     "");
         }
 
-        if(!(new CardController().checkIfUserOwnsCard(user, tradingDeal.getCardToTrade())))     //The deal contains a card that is not owned by the user or locked in the deck
+        if(!(new CardController().checkIfUserOwnsCard(user, tradingDeal.getCardToTrade(), unitOfWork)))     //The deal contains a card that is not owned by the user or locked in the deck
             return new Response(HttpStatus.FORBIDDEN,
                     ContentType.PLAIN_TEXT,
                     "The deal contains a card that is not owned by the user or locked in the deck.");
 
         TradingRepo tradingRepo = new TradingRepo();
+
         try {
             ResultSet resultSet = tradingRepo.getDealWithId(tradingDeal.getId(), unitOfWork);       //check if deal with this Id exists
             if(resultSet.next())
@@ -49,6 +50,7 @@ public class TradingController {
 
             tradingRepo.createDeal(tradingDeal, user, unitOfWork);      //create trading deal
             unitOfWork.commit();
+            unitOfWork.close();
             return new Response(HttpStatus.CREATED,
                     ContentType.PLAIN_TEXT,
                     "Trading deal successfully created");
@@ -56,16 +58,19 @@ public class TradingController {
             e.printStackTrace();
             unitOfWork.rollback();
         }
+        unitOfWork.close();
         return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                 ContentType.PLAIN_TEXT,
                 "");
     }
 
     public Response handlePostCarryOut(Request request) {
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
         String tradingDealId = request.getPathParts().get(1);
         TradingRepo tradingRepo = new TradingRepo();
-        String cardId = request.getBody().trim();
+        String cardIdRaw = request.getBody().trim();
+        String cardId = cardIdRaw.replace("\"", "");
 
         try {
             ResultSet resultSet = tradingRepo.getDealWithId(tradingDealId, unitOfWork);     //check if deal with this Id exists
@@ -80,14 +85,26 @@ public class TradingController {
                     resultSet.getString(4),
                     resultSet.getInt(5));
 
-            if(!(new CardController().checkIfUserOwnsCard(user, cardId)) || !(new CardController().checkRequirements(cardId, tradingDeal)))     //check if card is owned by user and not locked in deck
+            if(tradingDeal.getSeller() == user.getUid()){       //cannot trade with yourself
+                unitOfWork.rollback();
+                unitOfWork.close();
+                return new Response(HttpStatus.FORBIDDEN,
+                        ContentType.PLAIN_TEXT,
+                        "You can not trade with yourself!");
+            }
+
+            if(!(new CardController().checkIfUserOwnsCard(user, cardId, unitOfWork)) || !(new CardController().checkRequirements(cardId, tradingDeal, unitOfWork))) {     //check if card is owned by user and not locked in deck
+                unitOfWork.rollback();
+                unitOfWork.close();
                 return new Response(HttpStatus.FORBIDDEN,                                                                       //and meets the requirements
                         ContentType.PLAIN_TEXT,
                         "The offered card is not owned by the user, or the requirements are not met (Type, MinimumDamage), or the offered card is locked in the deck.");
+            }
 
             tradingRepo.executeTrade(tradingDeal, user, cardId, unitOfWork);        //execute deal
             tradingRepo.deleteDeal(tradingDealId, unitOfWork);                      //delete deal
             unitOfWork.commit();
+            unitOfWork.close();
             return new Response(HttpStatus.OK,
                     ContentType.PLAIN_TEXT,
                     "Trading deal successfully executed.");
@@ -95,6 +112,7 @@ public class TradingController {
             e.printStackTrace();
             unitOfWork.rollback();
         }
+        unitOfWork.close();
         return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                 ContentType.PLAIN_TEXT,
                 "");
@@ -102,6 +120,7 @@ public class TradingController {
     }
 
     public Response handleGet(Request request) {
+        UnitOfWork unitOfWork = new UnitOfWork();
         try {
             ResultSet resultSetDeals = new TradingRepo().getDeals(unitOfWork);
 
@@ -112,7 +131,7 @@ public class TradingController {
                         resultSetDeals.getString(4),
                         resultSetDeals.getInt(5)).getDealProperties());
             }
-
+            unitOfWork.close();
             if(deals.isEmpty()) {     //No available deals
                 return new Response(HttpStatus.NO_CONTENT,
                         ContentType.PLAIN_TEXT,
@@ -125,6 +144,7 @@ public class TradingController {
 
         }catch(Exception e){
             e.printStackTrace();
+            unitOfWork.close();
             return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                     ContentType.PLAIN_TEXT,
                     "");
@@ -132,10 +152,10 @@ public class TradingController {
     }
 
     public Response handleDelete(Request request) {
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
         String tradingDealId = request.getPathParts().get(1);
         TradingRepo tradingRepo = new TradingRepo();
-
 
         try {
             ResultSet resultSet = tradingRepo.getDealWithId(tradingDealId, unitOfWork);     //check if deal with this Id exists
@@ -145,13 +165,14 @@ public class TradingController {
                         "The provided deal ID was not found.");
 
 
-            if(!(new CardController().checkIfUserOwnsCard(user, resultSet.getString(2))))     //check if deal contains card from user
+            if(!(new CardController().checkIfUserOwnsCard(user, resultSet.getString(2), unitOfWork)))     //check if deal contains card from user
                 return new Response(HttpStatus.FORBIDDEN,
                         ContentType.PLAIN_TEXT,
                         "The deal contains a card that is not owned by the user.");
 
             tradingRepo.deleteDeal(tradingDealId, unitOfWork);
             unitOfWork.commit();
+            unitOfWork.close();
             return new Response(HttpStatus.OK,
                     ContentType.PLAIN_TEXT,
                     "Trading deal successfully deleted");
@@ -159,6 +180,7 @@ public class TradingController {
             e.printStackTrace();
             unitOfWork.rollback();
         }
+        unitOfWork.close();
         return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                 ContentType.PLAIN_TEXT,
                 "");

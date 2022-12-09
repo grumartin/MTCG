@@ -82,4 +82,18 @@ public class UserRepo {
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
+
+    public void addDraw(UnitOfWork unitOfWork){
+        try{
+            PreparedStatement preparedStatement = unitOfWork
+                    .getPreparedStatement("SELECT * FROM users WHERE u_id = -1", false);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next()){
+                preparedStatement = unitOfWork.getPreparedStatement("INSERT INTO users VALUES(-1, 'draw', 'draw', 0, '', '')", false);
+                preparedStatement.executeUpdate();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

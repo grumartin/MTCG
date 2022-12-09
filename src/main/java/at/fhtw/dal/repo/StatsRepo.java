@@ -42,4 +42,17 @@ public class StatsRepo {
             throw new SQLException("Stats Update failed");
         }
     }
+
+    public void updateTotal(int player, UnitOfWork unitOfWork) throws SQLException {
+        PreparedStatement preparedStatement = unitOfWork
+                .getPreparedStatement("UPDATE user_stats " +
+                        "total = total + 1 " +
+                        "WHERE user_id = ?", false);
+        preparedStatement.setInt(1, player);
+
+        int affectedRows = preparedStatement.executeUpdate();
+        if(affectedRows == 0){
+            throw new SQLException("Stats Update failed");
+        }
+    }
 }

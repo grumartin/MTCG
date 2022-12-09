@@ -1,5 +1,6 @@
 package at.fhtw.service.deck;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.dal.repo.CardRepo;
 import at.fhtw.dal.repo.DeckRepo;
 import at.fhtw.httpserver.http.ContentType;
@@ -22,8 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static at.fhtw.service.Service.unitOfWork;
-
 public class DeckController {
     public Response handleGet(Request request) {
         if(request.getAuthorizedClient() == null)
@@ -31,16 +30,18 @@ public class DeckController {
                     ContentType.PLAIN_TEXT,
                     "Authentication information is missing or invalid");
 
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
 
         try {
             int deckId = new DeckRepo().getDeckIdFromUser(user, unitOfWork);
             if(deckId == -1) {     //Deck has no cards
                 return new Response(HttpStatus.NO_CONTENT,
                         ContentType.PLAIN_TEXT,
-                        "The request was fine, but the deck doesn't have any cards");
+                        "");
             }
             ResultSet resultSetCards = new DeckRepo().getCardsfromDeck(deckId, unitOfWork);
+            unitOfWork.close();
 
             List<Map<String, String>> cards = new ArrayList<Map<String, String>>();
             while(resultSetCards.next()){
@@ -59,6 +60,7 @@ public class DeckController {
                     new ObjectMapper().writeValueAsString(cards));
         }catch(Exception e){
             e.printStackTrace();
+            unitOfWork.close();
             return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                     ContentType.PLAIN_TEXT,
                     "");
@@ -72,7 +74,8 @@ public class DeckController {
                     ContentType.PLAIN_TEXT,
                     "Authentication information is missing or invalid");
 
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
 
         try {
             int deckId = new DeckRepo().createDeck(user, unitOfWork);
@@ -87,6 +90,7 @@ public class DeckController {
 
             if(new DeckRepo().configureDeck(user, cardIds, deckId, unitOfWork) == HttpStatus.OK){
                 unitOfWork.commit();
+                unitOfWork.close();
                 return new Response(HttpStatus.OK,
                         ContentType.PLAIN_TEXT,
                         "The deck has been successfully configured");
@@ -100,7 +104,7 @@ public class DeckController {
             unitOfWork.rollback();
             e.printStackTrace();
         }
-
+        unitOfWork.close();
         return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                 ContentType.PLAIN_TEXT,
                 "");
@@ -120,7 +124,7 @@ public class DeckController {
         return idsClean;
     }
 
-    public ResultSet getDeckFromPlayer(int id) throws SQLException {
+    public ResultSet getDeckFromPlayer(int id, UnitOfWork unitOfWork) throws SQLException {
         User user = new User();
         user.setUid(id);
         int deckId = new DeckRepo().getDeckIdFromUser(user, unitOfWork);

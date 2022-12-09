@@ -70,10 +70,11 @@ public class CardRepo {
         return preparedStatement.executeQuery();
     }
 
-    public ResultSet getCardsFromUserSpec(User user, UnitOfWork unitOfWork) throws SQLException{
+    public ResultSet getCardsFromUserSpec(User user, String cardId, UnitOfWork unitOfWork) throws SQLException{
         PreparedStatement preparedStatement = unitOfWork
-                .getPreparedStatement("SELECT c_id, deck_id FROM cards WHERE user_id = ?", false);
+                .getPreparedStatement("SELECT deck_id FROM cards WHERE user_id = ? AND c_id = ?", false);
         preparedStatement.setInt(1, user.getUid());
+        preparedStatement.setString(2, cardId);
 
         return preparedStatement.executeQuery();
     }
@@ -93,9 +94,6 @@ public class CardRepo {
         preparedStatement.setInt(2, newDeckId);
         preparedStatement.setString(3, cardId);
 
-        int affectedRows = preparedStatement.executeUpdate();
-
-        if(affectedRows == 0)
-            throw new RuntimeException("Card could not be transferred");
+        preparedStatement.executeUpdate();
     }
 }

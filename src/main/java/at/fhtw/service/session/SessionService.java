@@ -1,5 +1,6 @@
 package at.fhtw.service.session;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.httpserver.http.ContentType;
 import at.fhtw.httpserver.http.HttpStatus;
 import at.fhtw.httpserver.server.Request;
@@ -26,8 +27,11 @@ public class SessionService implements Service {
 
         if(credentials.getProperty("Username") != null && credentials.getProperty("Password") != null){
             UserController userController = new UserController();
+            UnitOfWork unitOfWork = new UnitOfWork();
+            User user = userController.getUserWithUserName(credentials.getProperty("Username"), unitOfWork);
+            unitOfWork.commit();
+            unitOfWork.close();
 
-            User user = userController.getUserWithUserName(credentials.getProperty("Username"));
             if(user != null){
                 if(userController.authorize(user, credentials.getProperty("Password"))){
                     return new Response(HttpStatus.OK,

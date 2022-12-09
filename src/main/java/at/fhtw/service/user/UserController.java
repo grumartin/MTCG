@@ -18,8 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import static at.fhtw.service.Service.unitOfWork;
-
 public class UserController {
     private Gson gson;
     private UserRepo userRepo;
@@ -61,6 +59,7 @@ public class UserController {
         user.setToken("mtcgToken");
         user.setCoins(20);
 
+        UnitOfWork unitOfWork = new UnitOfWork();
         HttpStatus httpStatus = userRepo.addUser(user, unitOfWork);
 
         String content;
@@ -78,6 +77,7 @@ public class UserController {
                 unitOfWork.rollback();
             }
         }
+        unitOfWork.close();
         return new Response(httpStatus,
                 ContentType.PLAIN_TEXT,
                 content);
@@ -93,14 +93,16 @@ public class UserController {
         if(pathParts.get(1) == null){
             return HttpStatus.NOT_FOUND;
         }
-
-        User user = getUserWithUserName(pathParts.get(1));
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = getUserWithUserName(pathParts.get(1), unitOfWork);
+        unitOfWork.commit();
         if(user != null){
             if(user.getUid() == request.getAuthorizedClient().getUid() || request.getAuthorizedClient().getUsername().equals("admin")){
+                unitOfWork.close();
                 return HttpStatus.OK;
             }
         }
-
+        unitOfWork.close();
         return HttpStatus.NOT_FOUND;
     }
 
@@ -118,16 +120,19 @@ public class UserController {
         }
 
         List<String> pathParts = request.getPathParts();
-        User user = getUserWithUserName(pathParts.get(1));
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = getUserWithUserName(pathParts.get(1), unitOfWork);
+        unitOfWork.commit();
 
         try{
+            unitOfWork.close();
             return new Response(HttpStatus.OK,
                     ContentType.JSON,
                     mapper.writeValueAsString(user.getUserProperties()));
         }catch(IOException exception){
             exception.printStackTrace();
         }
-
+        unitOfWork.close();
         return new Response(HttpStatus.NOT_FOUND,
                 ContentType.PLAIN_TEXT,
                 "");
@@ -148,12 +153,15 @@ public class UserController {
 
 
         List<String> pathParts = request.getPathParts();
-        User oldUser = getUserWithUserName(pathParts.get(1));
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User oldUser = getUserWithUserName(pathParts.get(1), unitOfWork);
         User newUser = gson.fromJson(request.getBody(), User.class);
+
 
         try{
             userRepo.updateUser(newUser, oldUser, unitOfWork);
             unitOfWork.commit();
+            unitOfWork.close();
             return new Response(HttpStatus.OK,
                     ContentType.PLAIN_TEXT,
                     "User successfully updated.");
@@ -161,13 +169,13 @@ public class UserController {
             unitOfWork.rollback();
             exception.printStackTrace();
         }
-
+        unitOfWork.close();
         return new Response(HttpStatus.NOT_FOUND,
                 ContentType.PLAIN_TEXT,
                 "User not found");
     }
 
-    public User getUserWithUserName(String username){
+    public User getUserWithUserName(String username, UnitOfWork unitOfWork){
         try{
             return buildUser(this.userRepo.getUser(username, unitOfWork));
         }catch(SQLException exception){

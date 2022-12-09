@@ -1,5 +1,6 @@
 package at.fhtw.service.pckg;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.dal.repo.PackageRepo;
 import at.fhtw.httpserver.http.ContentType;
 import at.fhtw.httpserver.http.HttpStatus;
@@ -7,8 +8,6 @@ import at.fhtw.httpserver.server.Request;
 import at.fhtw.httpserver.server.Response;
 import at.fhtw.models.Pckg;
 import at.fhtw.service.card.CardController;
-
-import static at.fhtw.service.Service.unitOfWork;
 
 public class PackageController {
     private PackageRepo packageRepo;
@@ -30,13 +29,14 @@ public class PackageController {
                     "Provided user is not \"admin\"");
 
 
-        Pckg newPckg = createPackage();
+        UnitOfWork unitOfWork = new UnitOfWork();
+        Pckg newPckg = createPackage(unitOfWork);
         if(newPckg.getP_id() == -1)
             return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                     ContentType.PLAIN_TEXT,
                     "");
 
-        HttpStatus result = new CardController().createCards(request, newPckg.getP_id());
+        HttpStatus result = new CardController().createCards(request, newPckg.getP_id(), unitOfWork);
         String content;
         if(result == HttpStatus.CREATED){
             unitOfWork.commit();
@@ -45,13 +45,13 @@ public class PackageController {
             unitOfWork.rollback();
             content = "At least one card in the packages already exists";
         }
-
+        unitOfWork.close();
         return new Response(result,
                             ContentType.PLAIN_TEXT,
                             content);
     }
 
-    public Pckg createPackage(){
+    public Pckg createPackage(UnitOfWork unitOfWork){
         Pckg pckg = new Pckg(1, 5, "MTCG-Package");
         pckg.setP_id(this.packageRepo.addPackage(pckg, unitOfWork));
         return pckg;

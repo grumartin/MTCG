@@ -1,5 +1,6 @@
 package at.fhtw.service.stats;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.dal.repo.StatsRepo;
 import at.fhtw.httpserver.http.ContentType;
 import at.fhtw.httpserver.http.HttpStatus;
@@ -17,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static at.fhtw.service.Service.unitOfWork;
-
 public class StatsController {
     public Response handleGetStats(Request request) {
         if(request.getAuthorizedClient() == null)
@@ -26,7 +25,8 @@ public class StatsController {
                     ContentType.PLAIN_TEXT,
                     "Authentication information is missing or invalid");
 
-        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        User user = new UserController().getUserWithUserName(request.getAuthorizedClient().getUsername(), unitOfWork);
 
         try {
             ResultSet resultSetStats = new StatsRepo().getStats(user, unitOfWork);
@@ -37,6 +37,7 @@ public class StatsController {
                         resultSetStats.getInt(3),
                         user.getUsername());
 
+                unitOfWork.close();
                 return new Response(HttpStatus.OK,
                         ContentType.JSON,
                         new ObjectMapper().writeValueAsString(userStats.getStats()));
@@ -45,6 +46,7 @@ public class StatsController {
             e.printStackTrace();
         }
 
+        unitOfWork.close();
         return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                 ContentType.PLAIN_TEXT,
                 "");
@@ -56,6 +58,7 @@ public class StatsController {
                     ContentType.PLAIN_TEXT,
                     "Authentication information is missing or invalid");
 
+        UnitOfWork unitOfWork = new UnitOfWork();
         try {
             ResultSet resultSetStats = new StatsRepo().getAllStats(unitOfWork);
 
@@ -66,14 +69,14 @@ public class StatsController {
                         resultSetStats.getInt(3),
                         resultSetStats.getString(4)).getStats());
             }
-
+            unitOfWork.close();
             return new Response(HttpStatus.OK,
                     ContentType.JSON,
                     new ObjectMapper().writeValueAsString(stats));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        unitOfWork.close();
         return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
                 ContentType.PLAIN_TEXT,
                 "");

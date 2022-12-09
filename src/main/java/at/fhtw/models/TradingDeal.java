@@ -1,11 +1,14 @@
 package at.fhtw.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class TradingDeal {
     private String Id;
     private String CardToTrade;
+    @SerializedName(value = "type", alternate = "Type")
     private CardType type;
     private int MinimumDamage;
     private int Seller;
@@ -60,10 +63,13 @@ public class TradingDeal {
     }
 
     public String getTypeString(){
-        if(this.type.equals(CardType.Monster))
-            return "monster";
-        else
-            return "spell";
+        if(this.type != null){
+            if(this.type.equals(CardType.Monster))
+                return "monster";
+            else
+                return "spell";
+        }
+        return null;
     }
 
     public void setType(String type) {

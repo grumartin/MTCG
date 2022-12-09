@@ -72,6 +72,8 @@ class DeckControllerTest {
         urlConnection.setRequestProperty("Authorization", "Basic admin-mtcgToken");
 
         int responseCode = urlConnection.getResponseCode();
+        assertEquals(HttpURLConnection.HTTP_NO_CONTENT, responseCode);
+        /*
         if(responseCode == HttpURLConnection.HTTP_NO_CONTENT){
             InputStream inputStream = urlConnection.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -80,6 +82,7 @@ class DeckControllerTest {
         }else {
             Assertions.assertFalse(true);
         }
+        */
     }
 
     @Test

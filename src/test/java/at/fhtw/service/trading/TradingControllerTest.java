@@ -16,7 +16,7 @@ class TradingControllerTest {
         URL url = new URL("http://localhost:10001/tradings");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
-        urlConnection.setRequestProperty("Authorization", "Basic Hans-mtcgToken");
+        urlConnection.setRequestProperty("Authorization", "Basic kienboec-mtcgToken");
         urlConnection.setDoOutput(true);
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
@@ -161,6 +161,8 @@ class TradingControllerTest {
         urlConnection.setRequestProperty("Authorization", "Basic admin-mtcgToken");
 
         int responseCode = urlConnection.getResponseCode();
+        assertEquals(HttpURLConnection.HTTP_NO_CONTENT, responseCode);
+        /*
         if(responseCode == HttpURLConnection.HTTP_NO_CONTENT){
             InputStream inputStream = urlConnection.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -169,6 +171,8 @@ class TradingControllerTest {
         }else {
             Assertions.assertFalse(true);
         }
+
+         */
     }
 
     @Test

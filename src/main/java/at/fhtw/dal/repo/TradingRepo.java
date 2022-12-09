@@ -55,15 +55,17 @@ public class TradingRepo {
         preparedStatement.setString(2, tradingDeal.getCardToTrade());
 
         int affectedRows = preparedStatement.executeUpdate();
-        if(affectedRows == 0){
+        if (affectedRows == 0) {
             throw new SQLException("trading deal failed");
         }
 
+        preparedStatement = unitOfWork
+                .getPreparedStatement("UPDATE cards SET user_id = ? WHERE c_id = ?", false);
         preparedStatement.setInt(1, tradingDeal.getSeller());
         preparedStatement.setString(2, cardId);
 
         affectedRows = preparedStatement.executeUpdate();
-        if(affectedRows == 0){
+        if (affectedRows == 0) {
             throw new SQLException("trading deal failed");
         }
     }

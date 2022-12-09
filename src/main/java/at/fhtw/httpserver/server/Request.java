@@ -1,11 +1,13 @@
 package at.fhtw.httpserver.server;
 
+import at.fhtw.dal.UnitOfWork;
 import at.fhtw.httpserver.http.Method;
 import at.fhtw.models.User;
 import at.fhtw.service.user.UserController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Request {
     private Method method;
@@ -117,7 +119,9 @@ public class Request {
                 return;
 
             UserController userController = new UserController();
-            User user = userController.getUserWithUserName(tokenParts[0]);
+            UnitOfWork unitOfWork = new UnitOfWork();
+            User user = userController.getUserWithUserName(tokenParts[0], unitOfWork);
+            unitOfWork.commit();
 
             if(user != null && (tokenParts[1].equals(user.getToken()) || tokenParts[0].equals("admin")))
                 authorizedClient = user;
