@@ -6,29 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a1861f1f-47e6-460b-a3d1-6fb2e4e34ef0" name="Changes" comment="Battle Service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/UnitOfWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/UnitOfWork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/CardRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/PackageRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/PackageRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/StatsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/StatsRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/TradingRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/TradingRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/dal/repo/UserRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/server/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/httpserver/server/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/CardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/CardType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/models/TradingDeal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/models/TradingDeal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/battle/BattleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/battle/BattleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/card/CardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/deck/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/deck/DeckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/PackageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/pckg/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/session/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/session/SessionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/stats/StatsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/stats/StatsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/trading/TradingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/trading/TradingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhtw/service/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/deck/DeckControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/deck/DeckControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/pckg/PackageControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/pckg/PackageControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/trading/TradingControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/trading/TradingControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/fhtw/service/user/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/fhtw/service/user/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,23 +47,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/martin/Workspaces/MTCG&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "C:/Users/martin/Workspaces/MTCG/assets",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\martin\Workspaces\MTCG\assets" />
       <recent name="C:\Users\martin\Workspaces\MTCG\src\main\java\at\fhtw\httpserver\request" />
       <recent name="C:\Users\martin\Workspaces\MTCG\src\main\java\at\fhtw\httpserver\enums" />
     </key>
@@ -239,7 +218,9 @@
       <workItem from="1670339632049" duration="4802000" />
       <workItem from="1670515516586" duration="17543000" />
       <workItem from="1670574923042" duration="5055000" />
-      <workItem from="1670582212538" duration="2203000" />
+      <workItem from="1670582212538" duration="2300000" />
+      <workItem from="1671034826558" duration="41000" />
+      <workItem from="1671203684454" duration="3220000" />
     </task>
     <task id="LOCAL-00001" summary="Http Server implemented">
       <created>1666779600774</created>
@@ -283,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670156421844</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Battle Service">
+      <created>1670584448021</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670584448021</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
