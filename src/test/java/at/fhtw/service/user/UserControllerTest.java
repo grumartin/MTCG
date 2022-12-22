@@ -34,7 +34,7 @@ class UserControllerTest {
         urlConnection.setDoOutput(true);
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        printWriter.write("{\"Username\": \"kienboec\", \r\n \"Password\":\"12345\"}");
+        printWriter.write("{\"Username\": \"admin\", \r\n \"Password\":\"12345\"}");
         printWriter.close();
         InputStream inputStream = urlConnection.getInputStream();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -137,5 +137,53 @@ class UserControllerTest {
         urlConnection.setRequestMethod("GET");
         int responseCode = urlConnection.getResponseCode();
         Assertions.assertEquals(HttpURLConnection.HTTP_UNAUTHORIZED, responseCode);
+    }
+
+    @Test
+    void testDeleteUser() throws IOException {
+        URL url = new URL("http://localhost:10001/users");
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("DELETE");
+        urlConnection.setRequestProperty("Authorization", "Basic admin-mtcgToken");
+        urlConnection.setDoOutput(true);
+        OutputStream outputStream = urlConnection.getOutputStream();
+        PrintWriter printWriter = new PrintWriter(outputStream);
+        printWriter.write("149");
+        printWriter.close();
+        int responseCode = urlConnection.getResponseCode();
+
+        Assertions.assertEquals(HttpURLConnection.HTTP_OK, responseCode);
+    }
+
+    @Test
+    void testDeleteUserWithoutAdmin() throws IOException {
+        URL url = new URL("http://localhost:10001/users");
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("DELETE");
+        urlConnection.setRequestProperty("Authorization", "Basic Olaf-mtcgToken");
+        urlConnection.setDoOutput(true);
+        OutputStream outputStream = urlConnection.getOutputStream();
+        PrintWriter printWriter = new PrintWriter(outputStream);
+        printWriter.write("149");
+        printWriter.close();
+        int responseCode = urlConnection.getResponseCode();
+
+        Assertions.assertEquals(HttpURLConnection.HTTP_FORBIDDEN, responseCode);
+    }
+
+    @Test
+    void testDeleteUserWrongUid() throws IOException {
+        URL url = new URL("http://localhost:10001/users");
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("DELETE");
+        urlConnection.setRequestProperty("Authorization", "Basic admin-mtcgToken");
+        urlConnection.setDoOutput(true);
+        OutputStream outputStream = urlConnection.getOutputStream();
+        PrintWriter printWriter = new PrintWriter(outputStream);
+        printWriter.write("324324");
+        printWriter.close();
+        int responseCode = urlConnection.getResponseCode();
+
+        Assertions.assertEquals(HttpURLConnection.HTTP_NOT_FOUND, responseCode);
     }
 }
