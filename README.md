@@ -12,6 +12,13 @@ Beim BattleService hatte ich Schwierigkeiten damit, dass die User im Curl-Skript
 # Unit Tests
 Ich habe meine Unit Tests ausschließlich an das „.yaml“ Dokument angelehnt und sie dementsprechend konzipiert. Es gibt jeweils einen Test für jeden HTTP-Response-Code. 
 
+# Unique Feature
+Ich hab mich dafür entschieden als zustäzliches Feature eine DELETE Funktionalität beim User-Service zu implementieren.
+Dabei ist wichtig das nur der Admin User löschen kann, sonst wird ein HTTP-Forbidden Code zurückgeschickt. Der Admin muss jediglich die User-Id im Body übergeben, um einen User zu löschen.
+Wird der User mit entsprechender uid nicht gefunden bzw existiert nicht, so wird ein NOT-FOUND retourniert.
+
+Es wurden zusätzliche Tests implementiert und die Funktionaliät zu testen. 
+
 # Tracked Time 
 | Datum       | Zeit[h] | Kommentar                              |
 |-------------|---------|----------------------------------------|

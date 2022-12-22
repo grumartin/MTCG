@@ -94,7 +94,7 @@ class DeckControllerTest {
         urlConnection.setRequestMethod("PUT");
         OutputStream outputStream = urlConnection.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream);
-        printWriter.write("[\"845f0dc7-37d0-426e-994e-43fc3ac83c08\", \"99f8f8dc-e25e-4a95-aa2c-782823f36e2a\", \"e85e3976-7c86-4d06-9a80-641c2019a79f\", \"dfdd758f-649c-40f9-ba3a-8657f4b3439f\"]");
+        printWriter.write("[\"b2237eca-0271-43bd-87f6-b22f70d42ca4\", \"9e8238a4-8a7a-487f-9f7d-a8c97899eb48\", \"d60e23cf-2238-4d49-844f-c7589ee5342e\", \"fc305a7a-36f7-4d30-ad27-462ca0445649\"]");
         printWriter.close();
 
         int responseCode = urlConnection.getResponseCode();

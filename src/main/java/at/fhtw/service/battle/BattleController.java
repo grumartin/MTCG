@@ -47,10 +47,10 @@ public class BattleController {
                 }else{
                     //draw
                     battleRepo.setWinner(battle, unitOfWork);
+                    //update total played games
+                    new StatsRepo().updateTotal(battle.getPlayerA(), unitOfWork);
+                    new StatsRepo().updateTotal(battle.getPlayerB(), unitOfWork);
                 }
-                //update total played games
-                new StatsRepo().updateTotal(battle.getPlayerA(), unitOfWork);
-                new StatsRepo().updateTotal(battle.getPlayerB(), unitOfWork);
             }else{
                 waitForBattle(battle, unitOfWork);
             }

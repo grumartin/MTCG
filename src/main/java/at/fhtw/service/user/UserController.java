@@ -212,4 +212,42 @@ public class UserController {
          */
         return password.equals(user.getPassword());
     }
+
+    public Response handleDelete(Request request) {
+        if(request.getAuthorizedClient() == null )
+            return new Response(HttpStatus.UNAUTHORIZED,
+                    ContentType.PLAIN_TEXT,
+                    "Unauthorized");
+
+        if(!request.getAuthorizedClient().getUsername().equals("admin"))
+            return new Response(HttpStatus.FORBIDDEN,
+                    ContentType.PLAIN_TEXT,
+                    "Only the admin can delete a user!");
+
+        int uid = Integer.parseInt(request.getBody().trim());
+        UnitOfWork unitOfWork = new UnitOfWork();
+        UserRepo userRepo = new UserRepo();
+        try{
+            userRepo.getUserById(uid, unitOfWork);      //try if user with given uid exists
+            userRepo.deleteUser(uid, unitOfWork);
+        }catch (Exception e){
+            unitOfWork.rollback();
+            unitOfWork.close();
+            if(e.getClass().equals(SQLException.class))     //No user with given id exists
+                return new Response(HttpStatus.NOT_FOUND,
+                        ContentType.PLAIN_TEXT,
+                        "");
+
+            e.printStackTrace();
+            return new Response(HttpStatus.INTERNAL_SERVER_ERROR,
+                    ContentType.PLAIN_TEXT,
+                    "");
+        }
+        unitOfWork.commit();
+        unitOfWork.close();
+        return new Response(HttpStatus.OK,
+                ContentType.PLAIN_TEXT,
+                "User successfully deleted");
+
+    }
 }

@@ -22,6 +22,9 @@ public class UserService implements Service {
             case PUT:
                 response = userController.handlePut(request);
                 break;
+            case DELETE:
+                response = userController.handleDelete(request);
+                break;
             default:
                 response = new Response(HttpStatus.BAD_REQUEST,
                         ContentType.PLAIN_TEXT,

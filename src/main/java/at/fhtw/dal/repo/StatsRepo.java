@@ -46,7 +46,7 @@ public class StatsRepo {
     public void updateTotal(int player, UnitOfWork unitOfWork) throws SQLException {
         PreparedStatement preparedStatement = unitOfWork
                 .getPreparedStatement("UPDATE user_stats " +
-                        "total = total + 1 " +
+                        "SET total = total + 1 " +
                         "WHERE user_id = ?", false);
         preparedStatement.setInt(1, player);
 

@@ -96,4 +96,27 @@ public class UserRepo {
             e.printStackTrace();
         }
     }
+
+    public void deleteUser(int uid, UnitOfWork unitOfWork) throws RuntimeException{
+        try{
+            PreparedStatement preparedStatement = unitOfWork
+                    .getPreparedStatement("DELETE FROM user_stats WHERE user_id = ?", false);
+            preparedStatement.setInt(1, uid);
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if(affectedRows == 0)
+                throw new SQLException();
+
+            preparedStatement = unitOfWork
+                    .getPreparedStatement("DELETE FROM users WHERE u_id = ?", false);
+            preparedStatement.setInt(1, uid);
+            affectedRows = preparedStatement.executeUpdate();
+
+            if(affectedRows == 0)
+                throw new SQLException();
+        }catch(SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException("User delete failed!");
+        }
+    }
 }

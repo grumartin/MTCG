@@ -47,7 +47,7 @@ class BattleControllerTest {
         URL url = new URL("http://localhost:10001/battles");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
-        urlConnection.setRequestProperty("Authorization", "Basic Olaf-mtcgToken");
+        urlConnection.setRequestProperty("Authorization", "Basic Hans-mtcgToken");
         int responseCode = urlConnection.getResponseCode();
 
         if(responseCode == HttpURLConnection.HTTP_OK){

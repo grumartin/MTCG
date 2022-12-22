@@ -123,7 +123,7 @@ public class Request {
             User user = userController.getUserWithUserName(tokenParts[0], unitOfWork);
             unitOfWork.commit();
 
-            if(user != null && (tokenParts[1].equals(user.getToken()) || tokenParts[0].equals("admin")))
+            if(user != null && tokenParts[1].equals(user.getToken())) //|| tokenParts[0].equals("admin")
                 authorizedClient = user;
         }
     }
