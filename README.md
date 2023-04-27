@@ -1,4 +1,20 @@
 # MTCG SWEN Projekt
+# Anforderungen
+Dieser HTTP/REST-basierte Server soll als Plattform zum Handeln und Kämpfen mit Karten dienen.
+- Ein Benutzer ist ein registrierter Spieler mit Anmeldeinformationen (eindeutiger Benutzername, Passwort).
+- Ein Benutzer kann seine Karten verwalten.
+- Eine Karte besteht aus: einem Namen und mehreren Attributen (Schaden, Elementtyp).
+- Eine Karte ist entweder eine Zauber- oder eine Monsterkarte.
+- Der Schaden einer Karte ist konstant und ändert sich nicht.
+- Ein Benutzer hat mehrere Karten in seinem Stapel.
+- Ein Stapel ist die Sammlung aller seiner aktuellen Karten (Hinweis: Karten können durch Handel entfernt werden).
+- Ein Benutzer kann Karten kaufen, indem er Pakete erwirbt.
+- Ein Paket besteht aus 5 Karten und kann vom Server durch Zahlung von 5 virtuellen Münzen erworben werden.
+- Jeder Benutzer hat 20 Münzen zum Kauf von (4) Paketen.
+- Die besten 4 Karten werden vom Benutzer ausgewählt, um im Deck verwendet zu werden.
+- Das Deck wird in den Kämpfen gegen andere Spieler verwendet.
+- Ein Kampf ist eine Anfrage an den Server, um mit dem derzeit definierten Deck gegen einen anderen Benutzer anzutreten.
+
 # Design
 ![Architecture](assets/Architektur_Swen.jpg)
 # Lessons Learned
